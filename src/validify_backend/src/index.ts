@@ -1,7 +1,6 @@
-import { Canister, query, text } from 'azle';
+// routes/userRoute.ts
+import { createUser, getAllUsers, getUserById, updateUser, deleteUser } from './controllers/userController';
 
-export default Canister({
-    greet: query([text], text, (name) => {
-        return `Hello, ${name}!`;
-    })
-})
+export const UserRoutes = {
+    createUser, getAllUsers, getUserById, updateUser, deleteUser
+};
