@@ -1,5 +1,5 @@
 // repository.ts
-import { StableBTreeMap } from 'azle';
+import { StableBTreeMap, match, Opt, Vec } from 'azle';
 import { User } from '../models/userModel'; // Import the User model
 
 // StableBTreeMap for User storage
@@ -37,7 +37,7 @@ export function updateUser(id: string, username: string, email: string, password
     user.username = username;
     user.email = email;
     user.password = password;
-    user.updated_at = Opt.Some(ic.time());
+    user.updated_at = "";
     userStorage.insert(user.id, user);
   }
   return user.id;

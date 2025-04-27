@@ -1,10 +1,10 @@
 {
   "canisters": {
-    "validify_backend": {
-      "build": "npx azle validify_backend",
-      "candid": "src/validify_backend/validify_backend.did",
+    "be-validify": {
+      "build": "npx azle be-validify",
+      "candid": "src/be-validify/be-validify.did",
       "gzip": true,
-      "main": "src/validify_backend/src/index.ts",
+      "main": "src/be-validify/src/index.ts",
       "tech_stack": {
         "cdk": {
           "azle": {}
@@ -15,11 +15,11 @@
         }
       },
       "type": "custom",
-      "wasm": ".azle/validify_backend/validify_backend.wasm"
+      "wasm": ".azle/be-validify/be-validify.wasm"
     },
     "validify_frontend": {
       "dependencies": [
-        "validify_backend"
+        "be-validify"
       ],
       "source": [
         "src/validify_frontend/dist"

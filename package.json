@@ -13,7 +13,7 @@
   },
   "type": "module",
   "workspaces": [
-    "src/validify_backend",
+    "src/be-validify",
     "src/validify_frontend"
   ]
 }
