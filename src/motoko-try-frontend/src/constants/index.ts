@@ -7,6 +7,8 @@ import hero from "../assets/images/bg-hero.png";
 import template_sertif_1 from "../assets/images/template-sertif-1.png";
 import generate_not_found from "../assets/images/generate-not-found.png";
 import template_guideline from "../assets/images/template-guideline.png";
+import three_peoples from "../assets/images/three-peoples.png";
+import sponsors from "../assets/images/sponsors.png";
 
 import arrow_left from "../assets/icons/arrow_left.svg";
 import arrow_left_white from "../assets/icons/arrow_left_white.svg";
@@ -22,17 +24,26 @@ import size_guideline_purple from "../assets/icons/size_guideline_purple.svg";
 import drop from "../assets/icons/drop.svg";
 import action from "../assets/icons/action.svg";
 import action_purple from "../assets/icons/action_purple.svg";
+import verified from "../assets/icons/verified.svg";
+import certified from "../assets/icons/certified.svg";
+import monitoring from "../assets/icons/monitoring.svg";
+import five_stars from "../assets/icons/5_stars.svg";
+import linkedin from "../assets/icons/linkedin.svg";
+import facebook from "../assets/icons/facebook.svg";
+import twitter from "../assets/icons/twitter.svg";
 
 export const images = {
   hero,
   template_sertif_1,
   generate_not_found,
   template_guideline,
+  three_peoples,
 };
 
 export const logos = {
   main,
   main_purple,
+  sponsors,
 };
 
 export const backgrounds = {
@@ -54,6 +65,13 @@ export const icons = {
   drop,
   action,
   action_purple,
+  verified,
+  certified,
+  monitoring,
+  five_stars,
+  linkedin,
+  facebook,
+  twitter,
 };
 
 export const themeOptions = [
