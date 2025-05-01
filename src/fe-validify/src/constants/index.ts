@@ -1,0 +1,43 @@
+import main from "../assets/images/logo.png";
+import main_purple from "../assets/images/logo-purple.png";
+
+import background from "../assets/images/bg-generate.png";
+
+import hero from "../assets/images/bg-hero.png";
+import template_sertif_1 from "../assets/images/template-sertif-1.png";
+import generate_not_found from "../assets/images/generate-not-found.png";
+
+import arrow_left from "../assets/icons/arrow_left.svg";
+import arrow_left_white from "../assets/icons/arrow_left_white.svg";
+import certificate from "../assets/icons/certificate.svg";
+import download from "../assets/icons/download.svg";
+import download_2 from "../assets/icons/download_2.svg";
+import edit from "../assets/icons/edit.svg";
+import question_mark from "../assets/icons/question_mark.svg";
+import upload from "../assets/icons/upload.svg";
+
+export const images = {
+  hero,
+  template_sertif_1,
+  generate_not_found,
+};
+
+export const logos = {
+  main,
+  main_purple,
+};
+
+export const backgrounds = {
+  background,
+};
+
+export const icons = {
+  arrow_left,
+  arrow_left_white,
+  certificate,
+  download,
+  download_2,
+  edit,
+  question_mark,
+  upload,
+};
