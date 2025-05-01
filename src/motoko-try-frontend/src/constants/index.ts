@@ -21,6 +21,7 @@ import size_guideline from "../assets/icons/size_guideline.svg";
 import size_guideline_purple from "../assets/icons/size_guideline_purple.svg";
 import drop from "../assets/icons/drop.svg";
 import action from "../assets/icons/action.svg";
+import action_purple from "../assets/icons/action_purple.svg";
 
 export const images = {
   hero,
@@ -52,4 +53,15 @@ export const icons = {
   size_guideline_purple,
   drop,
   action,
+  action_purple,
 };
+
+export const themeOptions = [
+  { label: "Type 1", value: "1" },
+  { label: "Type 2", value: "2" },
+];
+
+export const signatureOptions = [
+  { label: "1", value: "1" },
+  { label: "2", value: "2" },
+];
