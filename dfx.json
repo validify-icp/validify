@@ -1,31 +1,18 @@
 {
   "canisters": {
-    "be-validify": {
-      "build": "npx azle be-validify",
-      "candid": "src/be-validify/be-validify.did",
-      "gzip": true,
-      "main": "src/be-validify/src/index.ts",
-      "tech_stack": {
-        "cdk": {
-          "azle": {}
-        },
-        "language": {
-          "javascript": {},
-          "typescript": {}
-        }
-      },
-      "type": "custom",
-      "wasm": ".azle/be-validify/be-validify.wasm"
+    "motoko-try-backend": {
+      "main": "src/motoko-try-backend/main.mo",
+      "type": "motoko"
     },
-    "validify_frontend": {
+    "motoko-try-frontend": {
       "dependencies": [
-        "be-validify"
+        "motoko-try-backend"
       ],
       "source": [
-        "src/validify_frontend/dist"
+        "src/motoko-try-frontend/dist"
       ],
       "type": "assets",
-      "workspace": "validify_frontend"
+      "workspace": "motoko-try-frontend"
     }
   },
   "defaults": {

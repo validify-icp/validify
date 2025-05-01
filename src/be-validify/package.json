@@ -1,9 +1,0 @@
-{
-    "name": "be-validify",
-    "version": "0.0.0",
-    "private": true,
-    "type": "module",
-    "dependencies": {
-        "azle": "0.17.1"
-    }
-}
