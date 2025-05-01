@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import Button from "./Button";
+import Button from "../elements/Button";
 
-import { logos } from "../constants";
+import { logos } from "../../constants";
 
 const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
   const [isScroll, setIsScroll] = useState(false);
@@ -25,7 +25,7 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
   }, []);
 
   return (
-    <header className="fixed z-[999] top-4 left-20 right-20 flex items-center justify-between border px-5 py-2 border-slate-200 rounded-lg bg-white/20 backdrop-blur-3xl">
+    <header className="fixed z-[111] top-4 left-20 right-20 flex items-center justify-between border px-5 py-2 border-slate-200 rounded-lg bg-white/20 backdrop-blur-3xl">
       <NavLink to="/" className="flex items-center gap-2">
         {logo_color === "text-white" && (
           <img
