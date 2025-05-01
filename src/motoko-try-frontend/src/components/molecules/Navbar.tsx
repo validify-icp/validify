@@ -7,14 +7,14 @@ import { logos } from "../../constants";
 
 const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
   const [isScroll, setIsScroll] = useState(false);
+  const [isLogoChange, setIsLogoChange] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 10) {
-        setIsScroll(true);
-      } else {
-        setIsScroll(false);
-      }
+      const y = window.scrollY;
+
+      setIsScroll(y >= 10);
+      setIsLogoChange(y >= 600);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -29,7 +29,7 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
       <NavLink to="/" className="flex items-center gap-2">
         {logo_color === "text-white" && (
           <img
-            src={isScroll ? logos.main_purple : logos.main}
+            src={isLogoChange ? logos.main_purple : logos.main}
             width={30}
             alt="logo"
           />
@@ -39,7 +39,7 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
         )}
         <span
           className={`font-bold text-2xl ${
-            isScroll ? "text-[#653FFF]" : logo_color
+            isLogoChange ? "text-[#653FFF]" : logo_color
           }`}
         >
           Validify
