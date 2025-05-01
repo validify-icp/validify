@@ -1,11 +1,19 @@
-import Navbar from "../../components/Navbar";
-import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
+
+import Navbar from "../../components/molecules/Navbar";
+import Button from "../../components/elements/Button";
 
 import { backgrounds, icons } from "../../constants";
 
 const ResultGeneratePage = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
+
   return (
-    <div className="w-full h-[1200px] font-dm-sans">
+    <div className="w-full h-[1300px] font-dm-sans">
       <Navbar logo_color="text-[#653FFF]" menu_color="text-black" />
       <div
         className="h-full px-20 pt-3 bg-cover bg-no-repeat bg-[position:10%_10%]"
@@ -16,17 +24,27 @@ const ResultGeneratePage = () => {
         <div className="w-full min-h-[520px] mt-20 mb-20 px-20 py-10 border border-white/25 bg-white mx-auto rounded-lg">
           <div className="mt-5">
             <p className="text-black font-medium text-base">
-              <span className="text-[#535760]">Generate {">"}</span> Class A
-              Certificate of Completion
+              <span
+                className="text-[#535760] cursor-pointer"
+                onClick={() => handleNavigate("/generate")}
+              >
+                Generate {">"}
+              </span>{" "}
+              Class A Certificate of Completion
             </p>
           </div>
           <div className="mt-2 w-full h-[22 0px] flex flex-col p-7 bg-linear-to-r from-[#B14EDF] to-[#B14EDF]/80 rounded-lg shadow-lg">
             <div className="w-full flex justify-between">
-              <img
-                src={icons.arrow_left_white}
-                width={35}
-                alt="icon arrow left"
-              />
+              <span
+                className="cursor-pointer"
+                onClick={() => handleNavigate("/generate")}
+              >
+                <img
+                  src={icons.arrow_left_white}
+                  width={35}
+                  alt="icon arrow left"
+                />
+              </span>
               <span className="border-2 border-[#b8dbca] p-2 text-[#43936C] text-sm font-semibold font-inter bg-[#F6F6F6] rounded-md">
                 Published
               </span>
@@ -103,12 +121,9 @@ const ResultGeneratePage = () => {
                       <td className="px-6 py-4">Completed</td>
                       <td className="px-6 py-4">08/09/24</td>
                       <td className="px-6 py-4">
-                        <a
-                          href="#"
-                          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        >
-                          Edit
-                        </a>
+                        <span className="w-8 h-8 p-2 flex items-center justify-center bg-[#F5F3FF] rounded-md">
+                          <img src={icons.action_purple} alt="action" />
+                        </span>
                       </td>
                     </tr>
                   ))}
