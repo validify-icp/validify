@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { processOCR } from "../../store/ocr/action";
-import type { RootState, AppDispatch } from "../../store";
-
 import Navbar from "../../components/Navbar";
 
-import background from "../../assets/images/bg-hero.png";
+import { processOCR } from "../../store/ocr/action";
 
 import { extractCertificateID } from "../../utils/certificate";
+
+import { backgrounds } from "../../constants";
+
+import type { RootState, AppDispatch } from "../../store";
 
 const HomePage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,7 +27,7 @@ const HomePage = () => {
       <div
         className="h-[806px] px-10 pt-3 bg-cover bg-no-repeat bg-[position:10%_200%]"
         style={{
-          backgroundImage: `url(${background})`,
+          backgroundImage: `url(${backgrounds.background})`,
         }}
       >
         <Navbar />
