@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import HomePage from "./pages/home/Home";
 import GeneratePage from "./pages/generate/Generate";
 import DetailGeneratePage from "./pages/generate/Detail";
 import ResultGeneratePage from "./pages/generate/Result";
+import ValidatePage from "./pages/validate/validate";
+import RegisterPage from "./pages/register/Register";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +26,14 @@ export const router = createBrowserRouter([
             element: <ResultGeneratePage />,
           },
         ],
+      },
+      {
+        path: "validate",
+        children: [{ index: true, element: <ValidatePage /> }],
+      },
+      {
+        path: "register",
+        children: [{ index: true, element: <RegisterPage /> }],
       },
     ],
   },
