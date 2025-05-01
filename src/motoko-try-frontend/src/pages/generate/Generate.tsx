@@ -2,11 +2,12 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import Navbar from "../../components/molecules/Navbar";
 import Button from "../../components/elements/Button";
-
-import { backgrounds, images } from "../../constants";
+import Input from "../../components/elements/Input";
+import Navbar from "../../components/molecules/Navbar";
 import ModalNewCertificate from "../../components/molecules/ModalNewCertificate";
+
+import { backgrounds, icons, images } from "../../constants";
 
 const GeneratePage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -63,11 +64,7 @@ const GeneratePage = () => {
                 />
               </div>
               <div className="mt-8 w-full flex items-center justify-between">
-                <input
-                  type="text"
-                  className="w-full h-12 bg-[#EBF0F4] rounded-md px-4"
-                  placeholder="Search"
-                />
+                <Input placeholder="Search" className="h-12 bg-[#EBF0F4]" />
               </div>
               <div className="mt-8 w-full flex flex-wrap gap-5 items-center justify-between">
                 {Array.from({ length: 4 }).map((_, i) => (
@@ -76,10 +73,11 @@ const GeneratePage = () => {
                     key={i}
                   >
                     <div className="flex flex-col gap-5">
-                      <div>
+                      <div className="flex items-center justify-between">
                         <span className="text-[#43936C] border border-[#b8dbca] px-2 py-1 rounded-md bg-[#F6F6F6]">
                           Published
                         </span>
+                        <img src={icons.action} alt="action icon" />
                       </div>
                       <h4 className="w-[80%] text-xl font-medium">
                         Sertifikat Kampus Merdeka Batch 2 - 2022
@@ -102,10 +100,11 @@ const GeneratePage = () => {
                     key={i}
                   >
                     <div className="flex flex-col gap-5">
-                      <div>
+                      <div className="flex items-center justify-between">
                         <span className="text-[#43936C] border border-[#b8dbca] px-2 py-1 rounded-md bg-[#F6F6F6]">
                           Published
                         </span>
+                        <img src={icons.action} alt="action icon" />
                       </div>
                       <h4 className="w-[80%] text-xl font-medium">
                         Sertifikat Kampus Merdeka Batch 2 - 2022
