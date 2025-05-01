@@ -2,14 +2,29 @@ import { useState } from "react";
 
 import { NavLink } from "react-router-dom";
 
-import Button from "../../components/Button";
+import Button from "../../components/elements/Button";
+import ModalUploadBackground from "../../components/molecules/ModalUploadBackground";
 
 import { images, backgrounds, icons } from "../../constants";
 
 const DetailGeneratePage = () => {
+  const [showModal, setShowModal] = useState({
+    uploadBackground: false,
+  });
   const [isTemplateTab, setIsTemplateTab] = useState(true);
+
+  const toggleModal = () => {
+    setShowModal({
+      ...showModal,
+      uploadBackground: !showModal.uploadBackground,
+    });
+  };
   return (
     <div className="w-full h-[950px] font-dm-sans">
+      <ModalUploadBackground
+        open={showModal.uploadBackground}
+        onClose={toggleModal}
+      />
       <div
         className="h-full px-20 pt-3 bg-cover bg-no-repeat bg-[position:10%_10%]"
         style={{
@@ -93,9 +108,9 @@ const DetailGeneratePage = () => {
                   </button>
                 </div>
                 <hr className="mt-3 border-none bg-[#D8DCDF] h-[2px]" />
-                <div className="mt-5 w-full h-[89%] bg-[#EFF1F3] rounded-md">
-                  <div className="mt-3 w-[60%] mx-auto p-3">
-                    <p className="font-inter text-sm w-[24%] bg-[#D8DCDF] font-semibold text-center rounded-md px-2 py-1">
+                <div className="mt-5 w-full flex h-[89%] bg-[#EFF1F3] rounded-md">
+                  <div className="w-[60%] mx-auto px-3 py-5 flex flex-col gap-2">
+                    <p className="font-inter text-sm w-[130px] bg-[#d8dcdf] font-semibold text-center rounded-lg px-2 py-2  ">
                       Halaman Depan
                     </p>
                     <img
@@ -126,9 +141,16 @@ const DetailGeneratePage = () => {
                   <p className="text-sm font-semibold">
                     Or Upload Your Own Background
                   </p>
-                  <button className="mt-4 w-full border-2 border-[#6240ED] px-6 py-2 rounded-lg text-xs text-[#6240ED] font-semibold">
-                    Upload Background
-                  </button>
+                  <label
+                    className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer"
+                    onClick={toggleModal}
+                  >
+                    <img
+                      src={icons.size_guideline_purple}
+                      alt="size guideline purple"
+                    />
+                    <span>Upload Background</span>
+                  </label>
                 </div>
                 <hr className="mt-5 border-none bg-[#D8DCDF] h-[2px]" />
                 <div className="mt-4">
@@ -196,9 +218,13 @@ const DetailGeneratePage = () => {
                 <hr className="mt-3 border-none bg-[#D8DCDF] h-[2px]" />
                 <div className="mt-4">
                   <p className="text-sm font-semibold">Logo Upload</p>
-                  <button className="mt-2 w-full border-2 border-[#6240ED] px-6 py-2 rounded-lg text-xs text-[#6240ED] font-semibold">
-                    Upload Logo
-                  </button>
+                  <label className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer">
+                    <img
+                      src={icons.size_guideline_purple}
+                      alt="size guideline purple"
+                    />
+                    <span>Upload Logo</span>
+                  </label>
                 </div>
                 <hr className="mt-3 border-none bg-[#D8DCDF] h-[2px]" />
                 <div className="mt-4">
@@ -245,9 +271,13 @@ const DetailGeneratePage = () => {
                   </div>
                   <div className="mt-4">
                     <p className="text-sm font-semibold">Upload Signature 1</p>
-                    <button className="mt-4 w-full border-2 border-[#6240ED] px-6 py-2 rounded-lg text-xs text-[#6240ED] font-semibold">
-                      Upload Signature
-                    </button>
+                    <label className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer">
+                      <img
+                        src={icons.size_guideline_purple}
+                        alt="size guideline purple"
+                      />
+                      <span>Upload Signature</span>
+                    </label>
                   </div>
                 </div>
                 <hr className="mt-5 mb-5 border-none bg-[#D8DCDF] h-[2px]" />
