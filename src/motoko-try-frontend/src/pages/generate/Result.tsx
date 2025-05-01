@@ -122,7 +122,7 @@ const ResultGeneratePage = () => {
                       <td className="px-6 py-4">08/09/24</td>
                       <td className="px-6 py-4">
                         <span className="w-8 h-8 p-2 flex items-center justify-center bg-[#F5F3FF] rounded-md">
-                          <img src={icons.action} alt="action" />
+                          <img src={icons.action_purple} alt="action" />
                         </span>
                       </td>
                     </tr>

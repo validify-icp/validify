@@ -5,12 +5,21 @@ import { NavLink } from "react-router-dom";
 import Button from "../../components/elements/Button";
 import ModalUploadBackground from "../../components/molecules/ModalUploadBackground";
 
-import { images, backgrounds, icons } from "../../constants";
+import {
+  images,
+  backgrounds,
+  icons,
+  themeOptions,
+  signatureOptions,
+} from "../../constants";
+import Input from "../../components/elements/Input";
+import SelectInput from "../../components/elements/SelectInput";
 
 const DetailGeneratePage = () => {
   const [showModal, setShowModal] = useState({
     uploadBackground: false,
   });
+
   const [isTemplateTab, setIsTemplateTab] = useState(true);
 
   const toggleModal = () => {
@@ -129,20 +138,18 @@ const DetailGeneratePage = () => {
                   <label htmlFor="" className="text-sm font-semibold">
                     Choose Template
                   </label>
-                  <select
-                    name=""
-                    id=""
-                    className="mt-2 border-2 border-slate-200 w-full p-2 text-xs rounded-md"
-                  >
-                    <option value="">Type 1</option>
-                  </select>
+                  <SelectInput
+                    className="mt-2"
+                    options={themeOptions}
+                    placeholder="-- choose template --"
+                  />
                 </div>
                 <div className="mt-4">
                   <p className="text-sm font-semibold">
                     Or Upload Your Own Background
                   </p>
                   <label
-                    className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer"
+                    className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer hover:bg-[#6240ED] hover:text-white"
                     onClick={toggleModal}
                   >
                     <img
@@ -155,7 +162,7 @@ const DetailGeneratePage = () => {
                 <hr className="mt-5 border-none bg-[#D8DCDF] h-[2px]" />
                 <div className="mt-4">
                   <p className="text-base font-semibold">Certificate Detail</p>
-                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg">
+                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300">
                     <div>
                       <p className="font-semibold text-sm">Certificate Title</p>
                       <p className="mt-2 text-[#717375] font-inter text-xs">
@@ -164,7 +171,7 @@ const DetailGeneratePage = () => {
                     </div>
                     <img src={icons.edit} alt="edit" width={20} />
                   </div>
-                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg">
+                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300">
                     <div>
                       <p className="font-semibold text-sm">Lable</p>
                       <p className="mt-2 text-[#717375] font-inter text-xs">
@@ -173,7 +180,7 @@ const DetailGeneratePage = () => {
                     </div>
                     <img src={icons.edit} alt="edit" width={20} />
                   </div>
-                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg">
+                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300">
                     <div>
                       <p className="font-semibold text-sm">Description</p>
                       <p className="mt-2 text-[#717375] font-inter text-xs">
@@ -182,7 +189,7 @@ const DetailGeneratePage = () => {
                     </div>
                     <img src={icons.edit} alt="edit" width={20} />
                   </div>
-                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4]">
+                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4] cursor-not-allowed">
                     <p className="text-sm font-medium">Partisipan Name</p>
                     <div className="flex items-center justify-center bg-[#0D804A] p-1 rounded-2xl">
                       <span className="font-semibold text-[10px] text-white">
@@ -190,7 +197,7 @@ const DetailGeneratePage = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4]">
+                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4] cursor-not-allowed">
                     <p className="text-sm font-medium">Role</p>
                     <div className="flex items-center justify-center bg-[#0D804A] p-1 rounded-2xl">
                       <span className="font-semibold text-[10px] text-white">
@@ -198,7 +205,7 @@ const DetailGeneratePage = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4]">
+                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4] cursor-not-allowed">
                     <p className="text-sm font-medium">Status</p>
                     <div className="flex items-center justify-center bg-[#0D804A] p-1 rounded-2xl">
                       <span className="font-semibold text-[10px] text-white">
@@ -206,7 +213,7 @@ const DetailGeneratePage = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4]">
+                  <div className="mt-2 px-3 py-3 flex items-center justify-between rounded-md bg-[#EBF0F4] cursor-not-allowed">
                     <p className="text-sm font-medium">Date</p>
                     <div className="flex items-center justify-center bg-[#0D804A] p-1 rounded-2xl">
                       <span className="font-semibold text-[10px] text-white">
@@ -218,7 +225,7 @@ const DetailGeneratePage = () => {
                 <hr className="mt-3 border-none bg-[#D8DCDF] h-[2px]" />
                 <div className="mt-4">
                   <p className="text-sm font-semibold">Logo Upload</p>
-                  <label className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer">
+                  <label className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer hover:bg-[#6240ED] hover:text-white">
                     <img
                       src={icons.size_guideline_purple}
                       alt="size guideline purple"
@@ -236,13 +243,11 @@ const DetailGeneratePage = () => {
                     <label htmlFor="" className="text-sm font-semibold">
                       Amount of Signature Display
                     </label>
-                    <select
-                      name=""
-                      id=""
-                      className="mt-2 border-2 border-slate-200 w-full p-2 text-xs rounded-md"
-                    >
-                      <option value="">1</option>
-                    </select>
+                    <SelectInput
+                      className="mt-2"
+                      options={signatureOptions}
+                      placeholder="-- choose amount signature --"
+                    />
                   </div>
                 </div>
                 <div className="mt-4">
@@ -251,27 +256,20 @@ const DetailGeneratePage = () => {
                     <label htmlFor="" className="text-xs font-semibold">
                       Name
                     </label>
-                    <input
-                      name=""
-                      id=""
-                      className="mt-2 border-2 border-slate-200 w-full p-2 text-xs rounded-md"
-                      placeholder="Name"
-                    />
+                    <Input placeholder="Name" className="mt-2 h-10 text-xs" />
                   </div>
                   <div className="mt-2">
                     <label htmlFor="" className="text-xs font-semibold">
                       Position
                     </label>
-                    <input
-                      name=""
-                      id=""
-                      className="mt-2 border-2 border-slate-200 w-full p-2 text-xs rounded-md"
+                    <Input
                       placeholder="Position"
+                      className="mt-2 h-10 text-xs"
                     />
                   </div>
                   <div className="mt-4">
                     <p className="text-sm font-semibold">Upload Signature 1</p>
-                    <label className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer">
+                    <label className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer hover:bg-[#6240ED] hover:text-white">
                       <img
                         src={icons.size_guideline_purple}
                         alt="size guideline purple"
@@ -309,7 +307,7 @@ const DetailGeneratePage = () => {
                       </div>
                     </div>
                     <hr className="mt-3 border-none bg-[#D8DCDF] h-[2px]" />
-                    <div className="p-3 w-full flex items-center justify-between mt-5 border-2 border-slate-200 rounded-lg bg-white cursor-pointer">
+                    <div className="p-3 w-full flex items-center justify-between mt-5 border-2 border-slate-200 rounded-lg bg-white cursor-pointer hover:border-slate-300">
                       <div className="flex items-center gap-2">
                         <div className="w-12 h-12 flex items-center justify-center bg-[#43936c] p-5 rounded-md">
                           <span className="font-semibold text-sm text-white">
@@ -369,7 +367,7 @@ const DetailGeneratePage = () => {
                         alt="icon question mark"
                       />
                     </div>
-                    <div className="w-full h-full flex items-center justify-center mt-2 border-2 border-dashed border-slate-200 rounded-md bg-white">
+                    <div className="w-full h-full flex items-center justify-center mt-2 border-2 border-dashed border-slate-200 rounded-md bg-white cursor-pointer hover:border-slate-300 hover:bg-[#fdfeff]">
                       <div className="w-[70%] h-1/2 flex flex-col items-center justify-center gap-3">
                         <img src={icons.upload} alt="icon upload" />
                         <p className="text-center text-base font-semibold">
@@ -378,9 +376,7 @@ const DetailGeneratePage = () => {
                         <p className="text-center text-sm text-[#5D5F60]">
                           Drag and drop the completed CSV template here, or{" "}
                         </p>
-                        <div className="mt-2">
-                          <Button label="Choose File" />
-                        </div>
+                        <Button className="mt-2" label="Choose File" />
                       </div>
                     </div>
                   </div>
