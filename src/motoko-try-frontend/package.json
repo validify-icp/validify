@@ -1,13 +1,14 @@
 {
-  "name": "fe-validify",
+  "name": "motoko-try-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "setup": "npm i && dfx canister create motoko-try-backend && dfx generate motoko-try-backend && dfx deploy",
+    "start": "vite --port 3000",
+    "prebuild": "dfx generate",
+    "build": "tsc && vite build",
+    "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",
@@ -34,5 +35,5 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1"
-  }
+  }  
 }
