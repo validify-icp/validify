@@ -6,7 +6,7 @@ import { processOCR } from "../../store/ocr/action";
 
 import { extractCertificateID } from "../../utils/certificate";
 
-import { backgrounds } from "../../constants";
+import { images } from "../../constants";
 
 import type { RootState, AppDispatch } from "../../store";
 
@@ -27,7 +27,7 @@ const HomePage = () => {
       <div
         className="h-[806px] px-10 pt-3 bg-cover bg-no-repeat bg-[position:10%_200%]"
         style={{
-          backgroundImage: `url(${backgrounds.background})`,
+          backgroundImage: `url(${images.hero})`,
         }}
       >
         <Navbar />
