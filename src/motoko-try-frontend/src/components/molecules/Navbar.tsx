@@ -54,14 +54,6 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
           >
             <li className="group">
               <NavLink
-                to="/verify"
-                className={({ isActive }) => (isActive ? "font-bold" : "")}
-              >
-                Verify
-              </NavLink>
-            </li>
-            <li className="group">
-              <NavLink
                 to="/generate"
                 className={({ isActive }) => (isActive ? "font-bold" : "")}
               >
@@ -74,6 +66,14 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
                 className={({ isActive }) => (isActive ? "font-bold" : "")}
               >
                 Validate
+              </NavLink>
+            </li>
+            <li className="group">
+              <NavLink
+                to="/verify"
+                className={({ isActive }) => (isActive ? "font-bold" : "")}
+              >
+                Register Certificate
               </NavLink>
             </li>
           </ul>

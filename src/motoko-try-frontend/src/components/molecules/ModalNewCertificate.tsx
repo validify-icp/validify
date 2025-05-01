@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { icons } from "../../constants";
 
 import Button from "../elements/Button";
 import BaseModal from "../elements/BaseModal";
+import Input from "../elements/Input";
 
 interface ModalProps {
   open: boolean;
@@ -11,10 +13,15 @@ interface ModalProps {
 }
 
 const ModalNewCertificate = ({ open, onClose }: ModalProps) => {
+  const [eventName, setEventName] = useState<string>("");
   const navigate = useNavigate();
 
   const handleNavigate = (href: string) => {
     navigate(href);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEventName(e.target.value);
   };
   return (
     <BaseModal open={open}>
@@ -32,10 +39,10 @@ const ModalNewCertificate = ({ open, onClose }: ModalProps) => {
           <label htmlFor="new-certificate" className="text-base font-medium">
             Event/Certificate Name
           </label>
-          <input
-            name="new-certificate"
-            id="new-certificate"
-            className="mt-2 border-2 border-slate-200 w-full px-2 py-3 text-sm rounded-md"
+          <Input
+            className="mt-2"
+            onChange={handleChange}
+            value={eventName}
             placeholder="Type the title..."
           />
         </div>
