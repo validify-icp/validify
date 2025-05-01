@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/molecules/Navbar";
 
 import { processOCR } from "../../store/ocr/action";
 
