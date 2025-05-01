@@ -25,7 +25,7 @@ const HomePage = () => {
   return (
     <div className="w-full h-[9000px] font-dm-sans">
       <div
-        className="h-[806px] px-10 pt-3 bg-cover bg-no-repeat bg-[position:10%_200%]"
+        className="h-[806px] px-10 pt-3 bg-cover bg-no-repeat bg-[position:0%_120%]"
         style={{
           backgroundImage: `url(${images.hero})`,
         }}

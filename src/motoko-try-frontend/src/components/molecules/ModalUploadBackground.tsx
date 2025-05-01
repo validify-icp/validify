@@ -85,7 +85,7 @@ const ModalUploadBackground = ({ open, onClose }: ModalProps) => {
         </div>
         <hr className="mt-5 w-full border border-slate-200 bg-[#D8DCDF]" />
         <div className="mt-5 w-full">
-          <div className="w-full h-[150px] flex flex-col gap-2 justify-center items-center border-2 border-slate-200 border-dashed rounded-lg">
+          <div className="w-full h-[150px] flex flex-col gap-2 justify-center items-center border-2 border-slate-200 border-dashed rounded-lg hover:border-slate-300 hover:bg-[#fdfeff]">
             <img src={icons.drop} alt="drop icon" width={55} />
             <p className="font-bold text-sm">
               Drag and drop your image here or{" "}

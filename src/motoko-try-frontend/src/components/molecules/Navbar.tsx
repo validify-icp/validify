@@ -70,7 +70,7 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
             </li>
             <li className="group">
               <NavLink
-                to="/verify"
+                to="/register"
                 className={({ isActive }) => (isActive ? "font-bold" : "")}
               >
                 Register Certificate
