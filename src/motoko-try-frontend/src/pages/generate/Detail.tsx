@@ -3,7 +3,12 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import Button from "../../components/elements/Button";
+import Input from "../../components/elements/Input";
+import SelectInput from "../../components/elements/SelectInput";
 import ModalUploadBackground from "../../components/molecules/ModalUploadBackground";
+import ModalEditor from "../../components/molecules/ModalEditor";
+
+import type { RootState } from "../../store";
 
 import {
   images,
@@ -13,27 +18,54 @@ import {
   signatureOptions,
   logos,
 } from "../../constants";
-import Input from "../../components/elements/Input";
-import SelectInput from "../../components/elements/SelectInput";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTemplate } from "../../store/certificate/slice";
 
 const DetailGeneratePage = () => {
   const [showModal, setShowModal] = useState({
     uploadBackground: false,
+    editor: false,
   });
+
+  const [titleEditor, setTitleEditor] = useState("");
 
   const [isTemplateTab, setIsTemplateTab] = useState(true);
 
-  const toggleModal = () => {
+  const dispatch = useDispatch();
+
+  const { title, description, label, template } = useSelector(
+    (state: RootState) => state.certificate
+  );
+
+  const toggleModalUploadBg = () => {
     setShowModal({
       ...showModal,
       uploadBackground: !showModal.uploadBackground,
     });
   };
+
+  const toggleModalEditor = (title: string): void => {
+    setTitleEditor(title);
+    setShowModal({
+      ...showModal,
+      editor: !showModal.editor,
+    });
+  };
+
+  const handleChangeTemplate = (value: string) => {
+    dispatch(setTemplate(value));
+  };
   return (
     <div className="w-full h-[950px] font-dm-sans">
       <ModalUploadBackground
         open={showModal.uploadBackground}
-        onClose={toggleModal}
+        onClose={toggleModalUploadBg}
+      />
+      <ModalEditor
+        title={titleEditor}
+        open={showModal.editor}
+        onClose={() => toggleModalEditor(titleEditor)}
       />
       <div
         className="h-full px-20 pt-3 bg-cover bg-no-repeat bg-[position:10%_10%]"
@@ -126,29 +158,31 @@ const DetailGeneratePage = () => {
                     <div
                       className="w-[604px] h-[423px] pt-9 pb-9 pl-9 pr-8 bg-cover"
                       style={{
-                        backgroundImage: `url(${images.template_sertif_1})`,
+                        backgroundImage: `url(${images[template]})`,
                       }}
                     >
                       <div className="w-full h-full p-5 flex flex-col font-abeezee">
                         <div className="w-full flex items-center justify-between">
-                          <p className="text-sm">
-                            Sertifikat ID : 0098/123940-
+                          <p className="text-xs">
+                            Sertifikat ID : 0098/123940-(auto)
                           </p>
                         </div>
-                        <div className="mt-2 w-full h-[200px] px-8 py-4 flex flex-col gap-3 items-center text-center">
-                          <div className="flex flex-col gap-2 items-center justify-between">
+                        <div className="mt-2 w-full h-[280px] px-8 py-2 flex flex-col gap-2 items-center text-center">
+                          <div className="flex flex-col gap-2 items-center justify-between  ">
                             <p className="text-2xl font-inter">
-                              Sertifikat Kelulusan
+                              {title || "Judul Sertifikat"}
                             </p>
                             <p className="text-xs">
                               Sertifikat ini dengan bangga diberikan pada :
                             </p>
-                            <p className="text-2xl">Nisrina Thifal K</p>
+                            <p className="text-2xl">Nama Peserta</p>
                           </div>
-                          <hr className="w-full border-none bg-[#4256AC] h-[1px]" />
+                          <hr className="w-full border-none bg-[#4256AC]/20 h-[1px]" />
+                          <p className="text-xs">Sebagai</p>
+                          <p className="text-sm">{label || "Label Kegiatan"}</p>
                           <p className="text-sm font-inter">
-                            Sudah berhasil menyelesaikan semua materi kelas
-                            “Contoh Nama Kelas” dengan nilai Memuaskan
+                            {description ||
+                              "Sudah berhasil menyelesaikan semua materi kela “Contoh Nama Kelas” dengan nilai Memuaskan"}
                           </p>
                         </div>
                         <div className="mt-2 w-full h-[70px] flex items-center gap-2">
@@ -198,6 +232,7 @@ const DetailGeneratePage = () => {
                     className="mt-2"
                     options={themeOptions}
                     placeholder="-- choose template --"
+                    onChange={(e) => handleChangeTemplate(e.target.value)}
                   />
                 </div>
                 <div className="mt-4">
@@ -206,7 +241,7 @@ const DetailGeneratePage = () => {
                   </p>
                   <label
                     className="flex items-center justify-center gap-2 text-center mt-4 w-full border-2 border-[#6240ED] px-6 py-3 rounded-lg text-xs text-[#6240ED] font-semibold cursor-pointer hover:bg-[#6240ED] hover:text-white"
-                    onClick={toggleModal}
+                    onClick={toggleModalUploadBg}
                   >
                     <img
                       src={icons.size_guideline_purple}
@@ -218,7 +253,10 @@ const DetailGeneratePage = () => {
                 <hr className="mt-5 border-none bg-[#D8DCDF] h-[2px]" />
                 <div className="mt-4">
                   <p className="text-base font-semibold">Certificate Detail</p>
-                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300">
+                  <div
+                    className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300"
+                    onClick={() => toggleModalEditor("Title Certificate")}
+                  >
                     <div>
                       <p className="font-semibold text-sm">Certificate Title</p>
                       <p className="mt-2 text-[#717375] font-inter text-xs">
@@ -227,7 +265,10 @@ const DetailGeneratePage = () => {
                     </div>
                     <img src={icons.edit} alt="edit" width={20} />
                   </div>
-                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300">
+                  <div
+                    className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300"
+                    onClick={() => toggleModalEditor("Label")}
+                  >
                     <div>
                       <p className="font-semibold text-sm">Lable</p>
                       <p className="mt-2 text-[#717375] font-inter text-xs">
@@ -236,7 +277,12 @@ const DetailGeneratePage = () => {
                     </div>
                     <img src={icons.edit} alt="edit" width={20} />
                   </div>
-                  <div className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300">
+                  <div
+                    className="mt-2 flex items-center justify-between border-2 border-slate-200 px-3 py-3 rounded-lg cursor-pointer hover:border-slate-300"
+                    onClick={() =>
+                      toggleModalEditor("Description of Certificate")
+                    }
+                  >
                     <div>
                       <p className="font-semibold text-sm">Description</p>
                       <p className="mt-2 text-[#717375] font-inter text-xs">
