@@ -1,10 +1,12 @@
 import main from "../assets/images/logo.png";
 import main_purple from "../assets/images/logo-purple.png";
+import logo_template_certificate from "../assets/images/logo-template-certificate.png";
 
 import background from "../assets/images/bg-generate.png";
 
 import hero from "../assets/images/bg-hero.png";
 import template_sertif_1 from "../assets/images/template-sertif-1.png";
+import template_sertif_2 from "../assets/images/template-sertif-2.png";
 import generate_not_found from "../assets/images/generate-not-found.png";
 import template_guideline from "../assets/images/template-guideline.png";
 import three_peoples from "../assets/images/three-peoples.png";
@@ -35,6 +37,7 @@ import twitter from "../assets/icons/twitter.svg";
 export const images = {
   hero,
   template_sertif_1,
+  template_sertif_2,
   generate_not_found,
   template_guideline,
   three_peoples,
@@ -44,6 +47,7 @@ export const logos = {
   main,
   main_purple,
   sponsors,
+  logo_template_certificate,
 };
 
 export const backgrounds = {
