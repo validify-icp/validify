@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import ocrSlice from "./ocr/slice";
+import certificateSlice from "./certificate/slice";
 
 const store = configureStore({
   reducer: {
     ocr: ocrSlice,
+    certificate: certificateSlice,
   },
 });
 
