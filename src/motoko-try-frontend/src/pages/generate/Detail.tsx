@@ -11,6 +11,7 @@ import {
   icons,
   themeOptions,
   signatureOptions,
+  logos,
 } from "../../constants";
 import Input from "../../components/elements/Input";
 import SelectInput from "../../components/elements/SelectInput";
@@ -122,11 +123,66 @@ const DetailGeneratePage = () => {
                     <p className="font-inter text-sm w-[130px] bg-[#d8dcdf] font-semibold text-center rounded-lg px-2 py-2  ">
                       Halaman Depan
                     </p>
-                    <img
-                      src={images.template_sertif_1}
-                      alt="Template Sertif 1"
-                      className="mt-2"
-                    />
+                    <div
+                      className="w-[604px] h-[423px] pt-9 pb-9 pl-9 pr-8 bg-cover"
+                      style={{
+                        backgroundImage: `url(${images.template_sertif_1})`,
+                      }}
+                    >
+                      <div className="w-full h-full p-5 flex flex-col font-abeezee">
+                        <div className="w-full flex items-center justify-between">
+                          <p className="text-sm">
+                            Sertifikat ID : 0098/123940-
+                          </p>
+                        </div>
+                        <div className="mt-2 w-full h-[200px] px-8 py-4 flex flex-col gap-3 items-center text-center">
+                          <div className="flex flex-col gap-2 items-center justify-between">
+                            <p className="text-2xl font-inter">
+                              Sertifikat Kelulusan
+                            </p>
+                            <p className="text-xs">
+                              Sertifikat ini dengan bangga diberikan pada :
+                            </p>
+                            <p className="text-2xl">Nisrina Thifal K</p>
+                          </div>
+                          <hr className="w-full border-none bg-[#4256AC] h-[1px]" />
+                          <p className="text-sm font-inter">
+                            Sudah berhasil menyelesaikan semua materi kelas
+                            “Contoh Nama Kelas” dengan nilai Memuaskan
+                          </p>
+                        </div>
+                        <div className="mt-2 w-full h-[70px] flex items-center gap-2">
+                          <div className="w-1/3 h-full">
+                            <div className="w-full h-full flex flex-col justify-center items-center gap-1">
+                              <p className="text-xs">Mindi Fransiskamaya</p>
+                              <hr className="w-full border-none bg-[#E0E0E0] h-[1px]" />
+                              <p className="text-xs font-inter">
+                                Penyelenggara
+                              </p>
+                            </div>
+                          </div>
+                          <div className="w-1/3 h-full">
+                            <div className="w-full h-full flex flex-col justify-center items-center gap-1">
+                              <img
+                                className="w-[70%]"
+                                src={logos.logo_template_certificate}
+                                alt="logo template certificate"
+                              />
+                              <p className="text-xs text-[#4E5BA6]">
+                                www.schoolofmichael.com
+                              </p>
+                            </div>
+                          </div>
+                          <div className="w-1/3 h-full">
+                            <div className="w-full h-full flex flex-col justify-center items-center gap-1">
+                              <p className="text-xs">Mindi Fransiskamaya</p>
+                              <hr className="w-full border-none bg-[#E0E0E0] h-[1px]" />
+                              <p className="text-xs font-inter">Tanggal</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
