@@ -79,8 +79,8 @@ export const icons = {
 };
 
 export const themeOptions = [
-  { label: "Type 1", value: "1" },
-  { label: "Type 2", value: "2" },
+  { label: "Type 1", value: "template_sertif_1" },
+  { label: "Type 2", value: "template_sertif_2" },
 ];
 
 export const signatureOptions = [

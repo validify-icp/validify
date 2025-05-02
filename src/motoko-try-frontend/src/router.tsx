@@ -4,8 +4,8 @@ import HomePage from "./pages/home/Home";
 import GeneratePage from "./pages/generate/Generate";
 import DetailGeneratePage from "./pages/generate/Detail";
 import ResultGeneratePage from "./pages/generate/Result";
-import ValidatePage from "./pages/validate/validate";
 import RegisterPage from "./pages/register/Register";
+import ValidatePage from "./pages/validate/Validate";
 
 export const router = createBrowserRouter([
   {
