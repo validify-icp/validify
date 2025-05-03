@@ -48,7 +48,7 @@ const HomePage = () => {
               </p>
               <label
                 htmlFor="fileInput"
-                className="mt-5 px-7 py-2 text-white text-lg font-normal rounded-lg border border-[#a693f5] outline outline-slate-200 bg-linear-to-t from-[#6240ED] to-[#917AF2] shadow-md cursor-pointer"
+                className="mt-5 px-7 py-2 text-white text-lg font-normal rounded-lg border border-[#a693f5] outline outline-slate-200 bg-linear-to-t from-[#6240ED] to-[#917AF2] shadow-md cursor-pointer hover:bg-linear-to-b hover:from-[#6240ED] hover:to-[#917AF2]"
               >
                 Select Certificate File
               </label>
