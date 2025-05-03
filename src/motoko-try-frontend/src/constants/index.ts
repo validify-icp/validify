@@ -33,6 +33,11 @@ import five_stars from "../assets/icons/5_stars.svg";
 import linkedin from "../assets/icons/linkedin.svg";
 import facebook from "../assets/icons/facebook.svg";
 import twitter from "../assets/icons/twitter.svg";
+import plus from "../assets/icons/plus.svg";
+import eye from "../assets/icons/eye.svg";
+import check_circle from "../assets/icons/check_circle.svg";
+import warning_danger from "../assets/icons/warning_danger.svg";
+import exclamation from "../assets/icons/exclamation.svg";
 
 export const images = {
   hero,
@@ -76,6 +81,11 @@ export const icons = {
   linkedin,
   facebook,
   twitter,
+  plus,
+  eye,
+  check_circle,
+  warning_danger,
+  exclamation,
 };
 
 export const themeOptions = [
