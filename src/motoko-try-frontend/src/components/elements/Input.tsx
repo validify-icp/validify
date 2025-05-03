@@ -1,4 +1,5 @@
 interface InputProps {
+  id?: string;
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -8,6 +9,7 @@ interface InputProps {
 }
 
 const Input = ({
+  id,
   placeholder,
   value,
   onChange,
@@ -16,11 +18,13 @@ const Input = ({
 }: InputProps) => {
   return (
     <input
+      id={id}
+      name={id}
       type={type}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={`${"border-2 border-slate-200 w-full px-4 py-3 text-sm rounded-md focus:border-slate-300 hover:border-slate-300 focus:outline-none focus:outline-offset-2"} ${className}`}
+      className={`${"border-2 border-slate-200 w-full px-4 py-3 text-sm rounded-md focus:border-slate-300 focus:bg-slate-100 hover:border-slate-300 hover:bg-slate-100 focus:outline-none focus:outline-offset-2"} ${className}`}
     />
   );
 };

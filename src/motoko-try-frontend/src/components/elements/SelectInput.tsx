@@ -25,7 +25,7 @@ const SelectInput = ({
       <select
         value={value}
         onChange={onChange}
-        className={`border-2 border-slate-200 w-full px-4 py-2 text-sm rounded-md focus:outline-none hover:border-slate-300 focus:border-slate-300 ${className}`}
+        className={`border-2 border-slate-200 w-full px-4 py-2 text-sm rounded-md focus:outline-none hover:border-slate-300 hover:bg-slate-100 focus:border-slate-300 focus:bg-slate-100 ${className}`}
       >
         <option value="" disabled>
           {placeholder}

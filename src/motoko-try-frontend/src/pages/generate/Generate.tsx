@@ -59,9 +59,12 @@ const GeneratePage = () => {
               <div className="w-full flex items-center justify-between">
                 <h3 className="text-3xl font-medium">Generate</h3>
                 <Button
-                  label="Generate New Certificate"
                   onClick={toggleModal}
-                />
+                  className="flex items-center gap-2"
+                >
+                  <img src={icons.plus} alt="icon plus" />
+                  Generate New Certificates
+                </Button>
               </div>
               <div className="mt-8 w-full flex items-center justify-between">
                 <Input placeholder="Search" className="h-12 bg-[#EBF0F4]" />
@@ -69,7 +72,7 @@ const GeneratePage = () => {
               <div className="mt-8 w-full flex flex-wrap gap-5 items-center justify-between">
                 {Array.from({ length: 4 }).map((_, i) => (
                   <div
-                    className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40"
+                    className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40 hover:border-slate-100 hover:bg-slate-50"
                     key={i}
                   >
                     <div className="flex flex-col gap-5">
@@ -96,13 +99,13 @@ const GeneratePage = () => {
                 ))}
                 {Array.from({ length: 4 }).map((_, i) => (
                   <div
-                    className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40"
+                    className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40 hover:border-slate-100 hover:bg-slate-50"
                     key={i}
                   >
                     <div className="flex flex-col gap-5">
                       <div className="flex items-center justify-between">
-                        <span className="text-[#43936C] border border-[#b8dbca] px-2 py-1 rounded-md bg-[#F6F6F6]">
-                          Published
+                        <span className="text-[#3D3F40] border border-[#b8dbca] px-2 py-1 rounded-md bg-[#EBF0F4]">
+                          Draft
                         </span>
                         <img src={icons.action} alt="action icon" />
                       </div>
