@@ -9,6 +9,7 @@ import SelectInput from "../../components/elements/SelectInput";
 import ModalUploadBackground from "../../components/molecules/ModalUploadBackground";
 import ModalEditor from "../../components/molecules/ModalEditor";
 import ModalConfirmGenerate from "../../components/molecules/ModalConfirmGenerate";
+import ModalReviewParticipants from "../../components/molecules/ModalReviewParticipants";
 
 import type { RootState } from "../../store";
 
@@ -46,6 +47,7 @@ const DetailGeneratePage = () => {
     uploadBackground: false,
     editor: false,
     confirm: false,
+    preview: false,
   });
 
   const [titleEditor, setTitleEditor] = useState("");
@@ -95,6 +97,13 @@ const DetailGeneratePage = () => {
     setShowModal({
       ...showModal,
       confirm: !showModal.confirm,
+    });
+  };
+
+  const toggleModalPreview = () => {
+    setShowModal({
+      ...showModal,
+      preview: !showModal.preview,
     });
   };
 
@@ -177,6 +186,10 @@ const DetailGeneratePage = () => {
         title={titleEditor}
         open={showModal.confirm}
         onClose={toggleModalConfirmGenerate}
+      />
+      <ModalReviewParticipants
+        open={showModal.preview}
+        onClose={toggleModalPreview}
       />
       <div
         className="h-[1000px] px-20 pt-3 bg-cover bg-no-repeat bg-[position:10%_10%]"
@@ -779,7 +792,10 @@ const DetailGeneratePage = () => {
                               </div>
                             </div>
                             <div>
-                              <button className="px-4 py-2 flex items-center gap-2 text-white text-sm font-medium rounded-lg border border-[#7c9ded] outline outline-[#517bf5] bg-gradient-to-t from-[#3267e3] to-[#6c91eb] shadow-md cursor-pointer hover:bg-gradient-to-b hover:from-[#3267e3] hover:to-[#6c91eb]">
+                              <button
+                                className="px-4 py-2 flex items-center gap-2 text-white text-sm font-medium rounded-lg border border-[#7c9ded] outline outline-[#517bf5] bg-gradient-to-t from-[#3267e3] to-[#6c91eb] shadow-md cursor-pointer hover:bg-gradient-to-b hover:from-[#3267e3] hover:to-[#6c91eb]"
+                                onClick={toggleModalPreview}
+                              >
                                 <span>
                                   <img src={icons.eye} alt="" />
                                 </span>
