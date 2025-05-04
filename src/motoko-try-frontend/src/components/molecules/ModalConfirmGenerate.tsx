@@ -57,8 +57,6 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
         const imageUrl = await uploadToCloudinary(imageData);
         urls.push(imageUrl);
 
-        console.log("All uploaded image URLs:", urls);
-
         zip.file(`${data_participants[i].ID}.png`, imageData.split(",")[1], {
           base64: true,
         });

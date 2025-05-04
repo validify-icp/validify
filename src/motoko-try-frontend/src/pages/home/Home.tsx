@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
+import { useNavigate } from "react-router-dom";
+
 import Button from "../../components/elements/Button";
 import Input from "../../components/elements/Input";
 import Navbar from "../../components/molecules/Navbar";
@@ -17,11 +19,18 @@ const HomePage = () => {
   const ocrResults = useSelector((state: RootState) => state.ocr.results);
   const loading = useSelector((state: RootState) => state.ocr.loading);
 
-  const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const navigate = useNavigate();
+
+  const handleFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      dispatch(processOCR(Array.from(files)));
+      await dispatch(processOCR(Array.from(files)));
+      handleNavigate("/validate");
     }
+  };
+
+  const handleNavigate = (href: string) => {
+    navigate(href);
   };
 
   return (
@@ -66,7 +75,7 @@ const HomePage = () => {
         </div>
         {loading && <p className="text-blue-600">Processing OCR...</p>}
 
-        {false && (
+        {true && (
           <div className="space-y-4">
             {ocrResults.map((result, index) => (
               <div key={index} className="p-2 border rounded">
