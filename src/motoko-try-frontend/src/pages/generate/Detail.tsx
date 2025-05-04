@@ -74,9 +74,8 @@ const DetailGeneratePage = () => {
 
   const navigate = useNavigate();
 
-  const { title, description, label, template, custom_template } = useSelector(
-    (state: RootState) => state.certificate
-  );
+  const { title, description, label, template, custom_template, event_name } =
+    useSelector((state: RootState) => state.certificate);
 
   const toggleModalUploadBg = () => {
     setShowModal({
@@ -202,16 +201,14 @@ const DetailGeneratePage = () => {
             <NavLink to="/generate" className="text-[#535760]">
               Generate {">"}
             </NavLink>{" "}
-            Class A Certificate of Completion
+            {event_name}
           </p>
           <div className="mt-5 flex items-start gap-2">
             <NavLink to={"/generate"}>
               <img src={icons.arrow_left} width={40} alt="icon arrow left" />
             </NavLink>
             <div>
-              <h3 className="text-3xl font-medium">
-                Class A Certificate of Completion
-              </h3>
+              <h3 className="text-3xl font-medium">{event_name}</h3>
               <div className="mt-3 flex items-center gap-2">
                 <span className="px-4 py-1 text-xs border border-[#babec1]/40 bg-[#EBF0F4] text-[#3D3F40] font-medium font-inter rounded-sm">
                   Draft

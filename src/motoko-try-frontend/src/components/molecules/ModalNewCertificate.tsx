@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { icons } from "../../constants";
@@ -7,21 +9,31 @@ import Button from "../elements/Button";
 import BaseModal from "../elements/BaseModal";
 import Input from "../elements/Input";
 
+import { setEventName } from "../../store/certificate/slice";
+
 interface ModalProps {
   open: boolean;
   onClose: () => void;
 }
 
 const ModalNewCertificate = ({ open, onClose }: ModalProps) => {
-  const [eventName, setEventName] = useState<string>("");
+  const [event, setEvent] = useState<string>("");
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleNavigate = (href: string) => {
     navigate(href);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEventName(e.target.value);
+    setEvent(e.target.value);
+  };
+
+  const handleSave = () => {
+    // onClose();
+    handleNavigate("/generate/1");
+    dispatch(setEventName(event));
   };
   return (
     <BaseModal open={open}>
@@ -42,15 +54,13 @@ const ModalNewCertificate = ({ open, onClose }: ModalProps) => {
           <Input
             className="mt-2"
             onChange={handleChange}
-            value={eventName}
+            value={event}
             placeholder="Type the title..."
           />
         </div>
-        <hr className="mt-10 mb-5 w-full border-none bg-[#D8DCDF] h-[2px]" />
+        <hr className="mt-10 mb-5 w-full border-none bg-[#D8DCDF] h-[1px]" />
         <div className="mt-2 w-full flex items-center justify-end">
-          <Button onClick={() => handleNavigate("/generate/1")}>
-            Create and Generate
-          </Button>
+          <Button onClick={handleSave}>Create and Generate</Button>
         </div>
       </div>
     </BaseModal>
