@@ -73,9 +73,9 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        {loading && <p className="text-blue-600">Processing OCR...</p>}
+        {false && <p className="text-blue-600">Processing OCR...</p>}
 
-        {true && (
+        {false && (
           <div className="space-y-4">
             {ocrResults.map((result, index) => (
               <div key={index} className="p-2 border rounded">
