@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import { motoko_try_backend } from '../../../../declarations/motoko-try-backend/index';
+
 
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
@@ -62,6 +64,25 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
         zip.file(`${data_participants[i].ID}.png`, imageData.split(",")[1], {
           base64: true,
         });
+
+        let contohData = [{
+          eventId: 1,
+          participantName: "John Doe",
+          participantRole: "Speaker",
+          description: "Presented topic on AI",
+          certificateTitle: "AI Conference 2025",
+          certificateLabel: "Keynote Speaker",
+          certificateLink: urls[0]
+        }]
+
+          const resCreate = await motoko_try_backend.createCertificatesNew(contohData);
+
+          console.log(resCreate);
+          // setUsers(res);
+
+          return
+
+
 
         // TO DO : add to database
       }

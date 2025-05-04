@@ -8,6 +8,7 @@ import Model "model";
 module {
   public class CertificateController() {
     private var certificates = Buffer.Buffer<Model.Certificate>(0);
+    private var certificatesNew = Buffer.Buffer<Model.CertificateNew>(0);
     
     // Create a new certificate
     public func create(
@@ -22,6 +23,8 @@ module {
       validUntil: Text,
       signature: Text,
       includeBarcode: Bool,
+      certStatus: Text,
+      certLink: Text,
       brandTemplate: Model.BrandColor
     ): Model.Result<Model.Certificate> {
       // Basic validation
@@ -49,16 +52,109 @@ module {
         signature;
         includeBarcode;
         brandTemplate;
+        certStatus;
+        certLink;
       };
       
       certificates.add(newCertificate);
       
       #ok(newCertificate)
     };
+
+    public func createCertificateNew(
+      id: Model.CertificateId,
+      eventId: Nat,
+      eventName: Text,
+      eventDate: Text,
+      certificateTitle: Text,
+      certificateLabel: Text,
+      certificateStatus: Text,
+      certificateLink: Text,
+      description: Text,
+      participantName: Text,
+      participantRole: Text,
+      participantStatus: Text,
+    ): Model.CertificateNew {
+      // Basic validation
+      // if (id == "" or eventName == "" or certificateTitle == "" or participantName == "") {
+      //   return #err(#InvalidData);
+      // };
+      
+      // // Check if certificate with this ID already exists
+      // for (cert in certificatesNew.vals()) {
+      //   if (cert.id == id) {
+      //     return #err(#AlreadyExists);
+      //   };
+      // };
+      
+      let newCertificate: Model.CertificateNew = {
+        id;
+        eventId;
+        eventName;
+        eventDate;
+        certificateTitle;
+        certificateLabel;
+        certificateStatus;
+        certificateLink;
+        description;
+        participantName;
+        participantRole;
+        participantStatus;
+      };
+      
+      certificatesNew.add(newCertificate);
+      
+      newCertificate
+    };
+
+    public func getCustomerCertificate(ids: [Model.CertificateId]) : [Model.CertificateUserView] {
+        var results: [Model.CertificateUserView] = [];
+
+        for (id in ids.vals()) {
+        var found: Bool = false;
+
+        for (cert in certificatesNew.vals()) {
+            if (id == cert.id) {
+                let view : Model.CertificateUserView = {
+                    id = cert.id;
+                    eventId = cert.eventId;
+                    eventName = cert.eventName;
+                    certificateTitle = cert.certificateTitle;
+                    issuedBy = cert.eventName;
+                    participantName = cert.participantName;
+                    roleDescription = cert.description;
+                    status = cert.participantStatus;
+                    link = cert.certificateLink;
+                };
+                results := Array.append<Model.CertificateUserView>(results, [view]);
+                found := true;
+                // break;
+            };
+        };
+
+        if (found == false) {
+            let notFoundView : Model.CertificateUserView = {
+                id = id;
+                eventId = 0; // or a placeholder
+                eventName = "Unknown Certificate";
+                certificateTitle = "Unknown";
+                issuedBy = "Unknown Issuer";
+                participantName = "Unknown";
+                roleDescription = "No details available";
+                status = "Not Found";
+                link = "#";
+            };
+            results := Array.append<Model.CertificateUserView>(results, [notFoundView]);
+        };
+    };
+
+        results;
+    };
+
     
     // Read a certificate by ID
-    public func read(id: Model.CertificateId): Model.Result<Model.Certificate> {
-      for (cert in certificates.vals()) {
+    public func read(id: Model.CertificateId): Model.Result<Model.CertificateNew> {
+      for (cert in certificatesNew.vals()) {
         if (cert.id == id) {
           return #ok(cert);
         };
@@ -68,15 +164,15 @@ module {
     };
     
     // Read all certificates
-    public func readAll(): [Model.Certificate] {
-      Buffer.toArray(certificates)
+    public func readAll(): [Model.CertificateNew] {
+      Buffer.toArray(certificatesNew)
     };
     
     // Read certificates by event ID
-    public func readByEvent(eventId: Model.EventId): [Model.Certificate] {
-      let filteredCertificates = Buffer.Buffer<Model.Certificate>(0);
+    public func readByEvent(eventId: Model.EventId): [Model.CertificateNew] {
+      let filteredCertificates = Buffer.Buffer<Model.CertificateNew>(0);
       
-      for (cert in certificates.vals()) {
+      for (cert in certificatesNew.vals()) {
         if (cert.eventId == eventId) {
           filteredCertificates.add(cert);
         };
@@ -86,10 +182,10 @@ module {
     };
     
     // Read certificates by participant name (partial match)
-    public func readByParticipant(name: Text): [Model.Certificate] {
-      let filteredCertificates = Buffer.Buffer<Model.Certificate>(0);
+    public func readByParticipant(name: Text): [Model.CertificateNew] {
+      let filteredCertificates = Buffer.Buffer<Model.CertificateNew>(0);
       
-      for (cert in certificates.vals()) {
+      for (cert in certificatesNew.vals()) {
         if (Text.contains(cert.participantName, #text name)) {
           filteredCertificates.add(cert);
         };
@@ -99,43 +195,44 @@ module {
     };
     
     // Update a certificate
-    public func update(id: Model.CertificateId, update: Model.CertificateUpdate): Model.Result<Model.Certificate> {
-      for (i in Iter.range(0, certificates.size() - 1)) {
-        let cert = certificates.get(i);
-        
+    public func update(id: Model.CertificateId, update: Model.CertificateUpdate): ?Model.CertificateNew {
+      for (i in Iter.range(0, certificatesNew.size() - 1)) {
+        let cert = certificatesNew.get(i);
+
         if (cert.id == id) {
-          let updatedCertificate: Model.Certificate = {
+          let updatedCertificate: Model.CertificateNew = {
             id = cert.id;
             eventId = cert.eventId;
-            eventName = Option.get(update.eventName, cert.eventName);
-            institutionLogo = Option.get(update.institutionLogo, cert.institutionLogo);
-            additionalLogo = switch (update.additionalLogo) {
-              case (null) { cert.additionalLogo };
-              case (?opt) { ?opt };
-            };
-            certificateTitle = Option.get(update.certificateTitle, cert.certificateTitle);
-            description = Option.get(update.description, cert.description);
-            participantName = Option.get(update.participantName, cert.participantName);
-            validUntil = Option.get(update.validUntil, cert.validUntil);
-            signature = Option.get(update.signature, cert.signature);
-            includeBarcode = Option.get(update.includeBarcode, cert.includeBarcode);
-            brandTemplate = Option.get(update.brandTemplate, cert.brandTemplate);
+            eventName = cert.eventName;
+            eventDate = cert.eventDate;
+            certificateTitle = if (update.certificateTitle == "") cert.certificateTitle else update.certificateTitle;
+            certificateLabel = if (update.certificateLabel == "") cert.certificateLabel else update.certificateLabel;
+            certificateStatus = if (update.certificateStatus == "") cert.certificateStatus else update.certificateStatus;
+            certificateLink = if (update.certificateLink == "") cert.certificateLink else update.certificateLink;
+            description = if (update.description == "") cert.description else update.description;
+            participantName = if (update.participantName == "") cert.participantName else update.participantName;
+            participantRole = if (update.participantRole == "") cert.participantRole else update.participantRole;
+            participantStatus = if (update.participantStatus == "") cert.participantStatus else update.participantStatus;
           };
-          
-          ignore certificates.put(i, updatedCertificate);
-          return #ok(updatedCertificate);
+
+          ignore certificatesNew.put(i, updatedCertificate);
+          return ?updatedCertificate;
         };
       };
-      
-      #err(#NotFound)
+
+      // Not found
+      null
     };
+
+
+
     
     // Delete a certificate
     public func delete(id: Model.CertificateId): Model.Result<()> {
       var found = false;
-      let newBuffer = Buffer.Buffer<Model.Certificate>(certificates.size());
+      let newBuffer = Buffer.Buffer<Model.CertificateNew>(certificatesNew.size());
       
-      for (cert in certificates.vals()) {
+      for (cert in certificatesNew.vals()) {
         if (cert.id != id) {
           newBuffer.add(cert);
         } else {
@@ -147,7 +244,7 @@ module {
         return #err(#NotFound);
       };
       
-      certificates := newBuffer;
+      certificatesNew := newBuffer;
       #ok(())
     };
   };

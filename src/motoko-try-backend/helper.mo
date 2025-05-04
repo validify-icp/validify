@@ -1,4 +1,12 @@
 import Types "types";
+    import Time "mo:base/Time";
+import Nat64 "mo:base/Nat64";
+import Int "mo:base/Int";
+import Text "mo:base/Text";
+import Char "mo:base/Char";
+import Array "mo:base/Array";
+import Iter "mo:base/Iter";
+import Prim "mo:prim";
 
 module {
     public type Result<T> = {
@@ -12,6 +20,27 @@ module {
         message: Text;
         data: ?T;
     };
+
+
+
+    public func generateUniqueID(length : Nat) : Text {
+        let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        let charsArray = Iter.toArray(Text.toIter(chars));
+        let charsCount = charsArray.size();
+        
+        var result = "";
+        var currentTime = Int.abs(Time.now());
+        
+        for (_ in Iter.range(0, length - 1)) {
+        let index = currentTime % charsCount;
+        result := result # Text.fromChar(charsArray[index]);
+        currentTime := currentTime / 10 + 13; // Simple modification to get different values
+        };
+
+        
+        Text.map(result, Prim.charToUpper);
+    };
+
     // Convert Result type to Response format
     public func toResponse<T>(result: Types.Result<T>, successMsg: Text): Response<T> {
         switch (result) {
