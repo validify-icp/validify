@@ -248,32 +248,14 @@ const ValidatePage = () => {
                     <tbody>
                       {dataParticipant.map((item, index) => (
                         <tr className="border-b border-gray-200" key={index}>
-                          <td
-                            className={`px-6 py-3 ${
-                              item.certificateTitle === "" ? "bg-[#fce9ec]" : ""
-                            }`}
-                          >
+                          <td className={`px-6 py-3 `}>
                             {item.certificateTitle}
                           </td>
-                          <td
-                            className={`px-6 py-3 ${
-                              item.participantName === "" ? "bg-[#fce9ec]" : ""
-                            }`}
-                          >
+                          <td className={`px-6 py-3`}>
                             {item.participantName}
                           </td>
-                          <td
-                            className={`px-6 py-3 ${
-                              item.issuedBy === "" ? "bg-[#fce9ec]" : ""
-                            }`}
-                          >
-                            {item.issuedBy}
-                          </td>
-                          <td
-                            className={`px-6 py-3 ${
-                              item.roleDescription === "" ? "bg-[#fce9ec]" : ""
-                            }`}
-                          >
+                          <td className={`px-6 py-3`}>{item.issuedBy}</td>
+                          <td className={`px-6 py-3`}>
                             {item.roleDescription}
                           </td>
                           <td
@@ -285,18 +267,8 @@ const ValidatePage = () => {
                           >
                             {item.status}
                           </td>
-                          <td
-                            className={`px-6 py-3 ${
-                              item.id === "" ? "bg-[#fce9ec]" : ""
-                            }`}
-                          >
-                            {item.id}
-                          </td>
-                          <td
-                            className={`px-6 py-3 ${
-                              item.link === "" ? "bg-[#fce9ec]" : ""
-                            }`}
-                          >
+                          <td className={`px-6 py-3`}>{item.id}</td>
+                          <td className={`px-6 py-3`}>
                             <a
                               href={item.link}
                               className={`${
