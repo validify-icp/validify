@@ -57,13 +57,13 @@ actor {
       
 
       for (req in requests.vals()) {
-        let id = Helper.generateUniqueID(10);
+        // let id = Helper.generateUniqueID(10);
 
-        let certificateStatus = "DRAFT";
-        let participantStatus = "DRAFT";
+        let certificateStatus = "Registered";
+        let participantStatus = "Registered";
 
         let newCert = certificateController.createCertificateNew(
-          id,
+          req.id,
           req.eventId,
           eventName,
           eventDate,

@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { motoko_try_backend } from '../../../../declarations/motoko-try-backend/index';
+import { motoko_try_backend } from '../../../../declarations/motoko-try-backend';
 
 
 import { useSelector } from "react-redux";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
-import JSZip from "jszip";
+// import JSZip from "jszip";
 
 import CertificateTemplate from "../template/CertificateTemplate";
 import Button from "../elements/Button";
@@ -20,6 +20,17 @@ interface ModalProps {
   title: string;
   open: boolean;
   onClose: () => void;
+}
+
+interface CertificateCreateReq {
+  id: string,
+  eventId: Number,
+  participantName: string,
+  participantRole: string,
+  description: string,
+  certificateTitle: string,
+  certificateLabel: string,
+  certificateLink: string,
 }
 
 const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
@@ -43,7 +54,7 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
 
   const handleDownload = async () => {
     const urls: string[] = [];
-    const zip = new JSZip();
+    // const zip = new JSZip();
 
     await new Promise((resolve) => setTimeout(resolve, 300));
 
@@ -59,37 +70,39 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
         const imageUrl = await uploadToCloudinary(imageData);
         urls.push(imageUrl);
 
-        console.log("All uploaded image URLs:", urls);
+        // console.log("All uploaded image URLs:", urls);
 
-        zip.file(`${data_participants[i].ID}.png`, imageData.split(",")[1], {
-          base64: true,
-        });
-
-        let contohData = [{
-          eventId: 1,
-          participantName: "John Doe",
-          participantRole: "Speaker",
-          description: "Presented topic on AI",
-          certificateTitle: "AI Conference 2025",
-          certificateLabel: "Keynote Speaker",
-          certificateLink: urls[0]
-        }]
-
-          const resCreate = await motoko_try_backend.createCertificatesNew(contohData);
-
-          console.log(resCreate);
-          // setUsers(res);
-
-          return
-
-
-
-        // TO DO : add to database
+        // zip.file(`${data_participants[i].ID}.png`, imageData.split(",")[1], {
+        //   base64: true,
+        // });
       }
     }
 
-    const content = await zip.generateAsync({ type: "blob" });
-    saveAs(content, "certificates.zip");
+    let createCertifateReqData: CertificateCreateReq[] = [];
+      for (const [index, item] of data_participants.entries()) {
+        const createData: CertificateCreateReq = {
+          id: String(item?.ID),
+          eventId: 1,
+          participantName: String(item?.Nama),
+          participantRole: label,
+          description: description,
+          certificateTitle: title,
+          certificateLabel: label,
+          certificateLink: urls[index]
+        };
+
+        createCertifateReqData.push(createData);
+      }
+
+      console.log("==> RES ", createCertifateReqData)
+
+    
+    const hitApiCreate = await motoko_try_backend.createCertificatesNew(createCertifateReqData)
+
+    console.log("Res API: ", hitApiCreate)
+
+    // const content = await zip.generateAsync({ type: "blob" });
+    // saveAs(content, "certificates.zip");
   };
 
   return (

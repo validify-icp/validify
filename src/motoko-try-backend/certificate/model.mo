@@ -21,6 +21,7 @@ module {
   };
 
   public type CreateCertRequest = {
+  id: Text;
   eventId: EventId;
   certificateTitle: Text;
   certificateLabel: Text;

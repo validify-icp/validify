@@ -18,6 +18,7 @@ interface CertificateState {
   signature_name_2: string;
   signature_position_2: string;
   signature_amount: number;
+  event_name: string;
 }
 
 const initialState: CertificateState = {
@@ -32,6 +33,7 @@ const initialState: CertificateState = {
   signature_name_2: "",
   signature_position_2: "",
   signature_amount: 1,
+  event_name: "",
 };
 
 const certificateSlice = createSlice({
@@ -73,6 +75,9 @@ const certificateSlice = createSlice({
     setSignatureAmount: (state, action) => {
       state.signature_amount = action.payload;
     },
+    setEventName: (state, action) => {
+      state.event_name = action.payload;
+    },
   },
 });
 
@@ -85,5 +90,6 @@ export const {
   setDataParticipants,
   setSignatureField,
   setSignatureAmount,
+  setEventName,
 } = certificateSlice.actions;
 export default certificateSlice.reducer;

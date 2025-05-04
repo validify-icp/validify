@@ -9,6 +9,7 @@ import SelectInput from "../../components/elements/SelectInput";
 import ModalUploadBackground from "../../components/molecules/ModalUploadBackground";
 import ModalEditor from "../../components/molecules/ModalEditor";
 import ModalConfirmGenerate from "../../components/molecules/ModalConfirmGenerate";
+import ModalReviewParticipants from "../../components/molecules/ModalReviewParticipants";
 
 import type { RootState } from "../../store";
 
@@ -46,6 +47,7 @@ const DetailGeneratePage = () => {
     uploadBackground: false,
     editor: false,
     confirm: false,
+    preview: false,
   });
 
   const [titleEditor, setTitleEditor] = useState("");
@@ -72,9 +74,8 @@ const DetailGeneratePage = () => {
 
   const navigate = useNavigate();
 
-  const { title, description, label, template, custom_template } = useSelector(
-    (state: RootState) => state.certificate
-  );
+  const { title, description, label, template, custom_template, event_name } =
+    useSelector((state: RootState) => state.certificate);
 
   const toggleModalUploadBg = () => {
     setShowModal({
@@ -95,6 +96,13 @@ const DetailGeneratePage = () => {
     setShowModal({
       ...showModal,
       confirm: !showModal.confirm,
+    });
+  };
+
+  const toggleModalPreview = () => {
+    setShowModal({
+      ...showModal,
+      preview: !showModal.preview,
     });
   };
 
@@ -178,6 +186,10 @@ const DetailGeneratePage = () => {
         open={showModal.confirm}
         onClose={toggleModalConfirmGenerate}
       />
+      <ModalReviewParticipants
+        open={showModal.preview}
+        onClose={toggleModalPreview}
+      />
       <div
         className="h-[1000px] px-20 pt-3 bg-cover bg-no-repeat bg-[position:10%_10%]"
         style={{
@@ -189,16 +201,14 @@ const DetailGeneratePage = () => {
             <NavLink to="/generate" className="text-[#535760]">
               Generate {">"}
             </NavLink>{" "}
-            Class A Certificate of Completion
+            {event_name}
           </p>
           <div className="mt-5 flex items-start gap-2">
             <NavLink to={"/generate"}>
               <img src={icons.arrow_left} width={40} alt="icon arrow left" />
             </NavLink>
             <div>
-              <h3 className="text-3xl font-medium">
-                Class A Certificate of Completion
-              </h3>
+              <h3 className="text-3xl font-medium">{event_name}</h3>
               <div className="mt-3 flex items-center gap-2">
                 <span className="px-4 py-1 text-xs border border-[#babec1]/40 bg-[#EBF0F4] text-[#3D3F40] font-medium font-inter rounded-sm">
                   Draft
@@ -779,7 +789,10 @@ const DetailGeneratePage = () => {
                               </div>
                             </div>
                             <div>
-                              <button className="px-4 py-2 flex items-center gap-2 text-white text-sm font-medium rounded-lg border border-[#7c9ded] outline outline-[#517bf5] bg-gradient-to-t from-[#3267e3] to-[#6c91eb] shadow-md cursor-pointer hover:bg-gradient-to-b hover:from-[#3267e3] hover:to-[#6c91eb]">
+                              <button
+                                className="px-4 py-2 flex items-center gap-2 text-white text-sm font-medium rounded-lg border border-[#7c9ded] outline outline-[#517bf5] bg-gradient-to-t from-[#3267e3] to-[#6c91eb] shadow-md cursor-pointer hover:bg-gradient-to-b hover:from-[#3267e3] hover:to-[#6c91eb]"
+                                onClick={toggleModalPreview}
+                              >
                                 <span>
                                   <img src={icons.eye} alt="" />
                                 </span>

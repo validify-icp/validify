@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,13 +6,47 @@ import Button from "../../components/elements/Button";
 import Input from "../../components/elements/Input";
 import Navbar from "../../components/molecules/Navbar";
 import ModalNewCertificate from "../../components/molecules/ModalNewCertificate";
+import { motoko_try_backend } from '../../../../declarations/motoko-try-backend';
 
 import { backgrounds, icons, images } from "../../constants";
 
+interface CertificateNew {
+  id: string;
+  eventId: number;
+  certificateStatus: string;
+  participantName: string;
+  participantRole: string;
+  description: string;
+  certificateTitle: string;
+  certificateLabel: string;
+  certificateLink: string;
+  participantStatus: string;
+  eventDate: string;
+  eventName: string;
+}
+
 const GeneratePage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [certificates, setCertificates] = useState<CertificateNew[]>([]);
+
 
   const navigate = useNavigate();
+
+  const fetchCertificates = async (): Promise<CertificateNew[]> => {
+    try {
+      const res = await motoko_try_backend.getAllCertificates(); // adjust if your method is different
+      console.log("RES ALL CERT ===>", res);
+      const certs = res?.data.length === 1 ? res.data[0] : [];
+      return certs;
+    } catch (err) {
+      console.error("Failed to fetch certificates", err);
+      return [];
+    }
+  };
+
+  
+
+
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -21,6 +55,15 @@ const GeneratePage = () => {
   const handleNavigate = (href: string) => {
     navigate(href);
   };
+
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchCertificates();
+      setCertificates(data);
+    };
+    loadData();
+  }, []);
 
   return (
     <div className="w-full h-[1200px] font-dm-sans">
@@ -70,61 +113,46 @@ const GeneratePage = () => {
                 <Input placeholder="Search" className="h-12 bg-[#EBF0F4]" />
               </div>
               <div className="mt-8 w-full flex flex-wrap gap-5 items-center justify-between">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <div
-                    className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40 hover:border-slate-100 hover:bg-slate-50"
-                    key={i}
-                  >
-                    <div className="flex flex-col gap-5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[#43936C] border border-[#b8dbca] px-2 py-1 rounded-md bg-[#F6F6F6]">
-                          Published
-                        </span>
-                        <img src={icons.action} alt="action icon" />
-                      </div>
-                      <h4 className="w-[80%] text-xl font-medium">
-                        Sertifikat Kampus Merdeka Batch 2 - 2022
-                      </h4>
-                      <div>
-                        <span className=" text-[#4E5BA6] px-2 py-1 rounded-md bg-[#F2F4F9]">
-                          Webinar
-                        </span>
-                      </div>
-                    </div>
-                    <Button
-                      label="See Result"
-                      onClick={() => handleNavigate("/generate/1/result")}
-                    />
-                  </div>
-                ))}
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <div
-                    className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40 hover:border-slate-100 hover:bg-slate-50"
-                    key={i}
-                  >
-                    <div className="flex flex-col gap-5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[#3D3F40] border border-[#b8dbca] px-2 py-1 rounded-md bg-[#EBF0F4]">
-                          Draft
-                        </span>
-                        <img src={icons.action} alt="action icon" />
-                      </div>
-                      <h4 className="w-[80%] text-xl font-medium">
-                        Sertifikat Kampus Merdeka Batch 2 - 2022
-                      </h4>
-                      <div>
-                        <span className=" text-[#4E5BA6] px-2 py-1 rounded-md bg-[#F2F4F9]">
-                          Webinar
-                        </span>
-                      </div>
-                    </div>
-                    <Button
-                      label="Edit"
-                      onClick={() => handleNavigate("/generate/1")}
-                    />
-                  </div>
-                ))}
-              </div>
+      {certificates.map((cert) => (
+        <div
+          className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40 hover:border-slate-100 hover:bg-slate-50"
+          key={cert.id}
+        >
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center justify-between">
+              <span
+                className={`${
+                  cert.certificateStatus === "Published"
+                    ? "text-[#43936C] border-[#b8dbca] bg-[#F6F6F6]"
+                    : "text-[#3D3F40] border-[#b8dbca] bg-[#EBF0F4]"
+                } border px-2 py-1 rounded-md`}
+              >
+                {cert.certificateStatus}
+              </span>
+              <img src={icons.action} alt="action icon" />
+            </div>
+            <h4 className="w-[80%] text-xl font-medium">
+              {cert.certificateTitle}
+            </h4>
+            <div>
+              <span className=" text-[#4E5BA6] px-2 py-1 rounded-md bg-[#F2F4F9]">
+                {cert.eventName}
+              </span>
+            </div>
+          </div>
+          <Button
+            label={cert.certificateStatus === "Published" ? "See Result" : "Edit"}
+            onClick={() =>
+              handleNavigate(
+                cert.certificateStatus === "Published"
+                  ? `/generate/${cert.id}/result`
+                  : `/generate/${cert.id}`
+              )
+            }
+          />
+        </div>
+      ))}
+    </div>
             </div>
           )}
         </div>
