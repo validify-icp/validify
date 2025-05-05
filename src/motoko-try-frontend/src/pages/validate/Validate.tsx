@@ -15,11 +15,14 @@ import { motoko_try_backend } from '../../../../declarations/motoko-try-backend'
 
 
 import { processOCR } from "../../store/ocr/action";
+import Loading from "../../components/elements/Loading";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const ValidatePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [idCertificates, setIdCertificates] = useState<string[]>([]);
   const [dataParticipant, setDataParticipant] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -44,15 +47,23 @@ const ValidatePage = () => {
   };
 
   const getCertificateUser = async (extractedIds: string[])  => {
-    let resGetCertif = await motoko_try_backend.getAllCustCertificates(extractedIds)
+    try {
+      setIsLoading(true)
+      let resGetCertif = await motoko_try_backend.getAllCustCertificates(extractedIds)
+      setDataParticipant(resGetCertif.data[0])
+      
+    } catch (error) {
+      setDataParticipant([])
+    
+    } finally {
+      setIsLoading(false)
+    }
 
-    console.log("====> Res get certif", resGetCertif)
-
-    setDataParticipant(resGetCertif.data[0])
     return 
   }
 
   useEffect(() => {
+    
     const extractedIds = ocrResults
       .map((result) => extractCertificateID(result.text))
       .filter((id): id is string => id !== null && id !== undefined);
@@ -74,6 +85,9 @@ const ValidatePage = () => {
 
   return (
     <div className="w-full h-[1200px] font-dm-sans">
+      {isLoading && (
+        <Loading />
+      )}
       <ModalNewCertificate open={showModal} onClose={toggleModal} />
       <Navbar logo_color="text-[#653FFF]" menu_color="text-black" />
       <div

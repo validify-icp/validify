@@ -84,7 +84,7 @@ actor {
       return Helper.resultToResponse<[ModelCertificate.CertificateNew]>(
       #ok(responses),
       "Certificate created successfully",
-      "Certificate not found",
+      "Certificate not founda",
       "Invalid certificate data provided",
     );
     };

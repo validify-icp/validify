@@ -32,9 +32,8 @@ const ResultGeneratePage = () => {
     navigate(href);
   };
 
-  const getCertificatesByEventId = async (eventId: number) => {
+  const getCertificatesByEventId = async (eventId: bigint) => {
     const resultCertificates = await motoko_try_backend.getCertificatesByEvent(eventId);
-    console.log("Result", resultCertificates);
   
     // If your backend returns an object like { data: [...] }, adjust accordingly:
     const data = resultCertificates?.data[0];
@@ -44,7 +43,6 @@ const ResultGeneratePage = () => {
 
   useEffect(() => {
 
-    console.log("Certificate ID:", id);
     const eventId = searchParams.get("eventId");
     getCertificatesByEventId(Number(eventId))
 
@@ -146,9 +144,9 @@ const ResultGeneratePage = () => {
                     <th scope="col" className="px-6 py-3">
                       Tanggal
                     </th>
-                    {/* <th scope="col" className="px-6 py-3">
-                      Aksi
-                    </th> */}
+                    <th scope="col" className="px-6 py-3">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -163,11 +161,11 @@ const ResultGeneratePage = () => {
                     <td className="px-6 py-4">{cert.participantRole || "-"}</td>
                     <td className="px-6 py-4">{cert.participantStatus}</td>
                     <td className="px-6 py-4">{cert.eventDate}</td>
-                    {/* <td className="px-6 py-4">
-                      <span className="w-8 h-8 p-2 flex items-center justify-center bg-[#F5F3FF] rounded-md">
-                        <img src={icons.action_purple} alt="action" />
-                      </span>
-                    </td> */}
+                    <td className="px-6 py-4">
+                      <a className="underline text-blue-500" href={cert.certificateLink} target="_blank">
+                        See Certificate
+                      </a>
+                    </td>
                   </tr>
                 ))}
                 </tbody>

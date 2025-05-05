@@ -27,6 +27,7 @@ interface CertificateNew {
 
 const GeneratePage = () => {
   const [showModal, setShowModal] = useState(false);
+  const[search, setSearch] = useState([]);
   const [certificates, setCertificates] = useState<CertificateNew[]>([]);
 
 
@@ -35,7 +36,6 @@ const GeneratePage = () => {
   const fetchCertificates = async (): Promise<CertificateNew[]> => {
     try {
       const res = await motoko_try_backend.getAllCertificates();
-      console.log("RES ALL CERT ===>", res);
   
       if (!res?.data) return [];
   
@@ -69,9 +69,25 @@ const GeneratePage = () => {
     const loadData = async () => {
       const data = await fetchCertificates();
       setCertificates(data);
+      setSearch(data)
     };
     loadData();
   }, []);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // let data = certificates
+    const data = certificates.find((item) => item.eventName.toLowerCase().includes(e.target.value));
+    if(!e.target.value){
+      setSearch(certificates)
+    } else {
+      if(data){
+        setSearch([data]);
+      } else {
+        setSearch([]);
+      }
+    }
+
+  }
 
   return (
     <div className="w-full h-[1200px] font-dm-sans">
@@ -118,10 +134,10 @@ const GeneratePage = () => {
                 </Button>
               </div>
               <div className="mt-8 w-full flex items-center justify-between">
-                <Input placeholder="Search" className="h-12 bg-[#EBF0F4]" />
+                <Input placeholder="Search" className="h-12 bg-[#EBF0F4]" onChange={handleSearch} />
               </div>
               <div className="mt-8 w-full flex flex-wrap gap-5 items-center justify-between">
-      {certificates.map((cert) => (
+      {search.map((cert) => (
         <div
           className="px-4 py-6 flex flex-col justify-between gap-5 w-[280px] h-[330px] rounded-md border-2 border-slate-200/40 hover:border-slate-100 hover:bg-slate-50"
           key={cert.id}
@@ -135,16 +151,16 @@ const GeneratePage = () => {
                     : "text-[#3D3F40] border-[#b8dbca] bg-[#EBF0F4]"
                 } border px-2 py-1 rounded-md`}
               >
-                {cert.certificateStatus}
+                Published
               </span>
               <img src={icons.action} alt="action icon" />
             </div>
             <h4 className="w-[80%] text-xl font-medium">
-              {cert.certificateTitle}
+              {cert.eventName}
             </h4>
             <div>
               <span className=" text-[#4E5BA6] px-2 py-1 rounded-md bg-[#F2F4F9]">
-                {cert.eventName}
+                Webinar
               </span>
             </div>
           </div>

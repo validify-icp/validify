@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 type Row = Record<string, any>;
 
 export const extractCertificateID = (text: string): string | null => {
-  const match = text.match(/Sertifikat ID\s*:\s*([0-9/]+)/);
+  const match = text.match(/ID\s*:\s*([A-Z0-9]+)/);
 
   return match ? match[1] : null;
 };

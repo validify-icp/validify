@@ -80,11 +80,6 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
         const imageUrl = await uploadToCloudinary(imageData);
         urls.push(imageUrl);
 
-        // console.log("All uploaded image URLs:", urls);
-
-        // zip.file(`${data_participants[i].ID}.png`, imageData.split(",")[1], {
-        //   base64: true,
-        // });
       }
     }
 
@@ -104,12 +99,8 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
         createCertifateReqData.push(createData);
       }
 
-      console.log("==> RES ", createCertifateReqData)
-
-    
     const hitApiCreate = await motoko_try_backend.createCertificatesNew(createCertifateReqData)
 
-    console.log("Res API: ", hitApiCreate)
 
     if (hitApiCreate.status) {
       handleNavigate(`/generate/${createCertifateReqData[0].id}/result?eventId=${createCertifateReqData[0].eventId}`);
