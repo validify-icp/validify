@@ -34,19 +34,27 @@ const GeneratePage = () => {
 
   const fetchCertificates = async (): Promise<CertificateNew[]> => {
     try {
-      const res = await motoko_try_backend.getAllCertificates(); // adjust if your method is different
+      const res = await motoko_try_backend.getAllCertificates();
       console.log("RES ALL CERT ===>", res);
-      const certs = res?.data.length === 1 ? res.data[0] : [];
-      return certs;
+  
+      if (!res?.data) return [];
+  
+      const seen = new Set<number>();
+      const uniqueCerts: CertificateNew[] = [];
+  
+      for (const cert of res.data[0]) {
+        if (!seen.has(cert.eventId)) {
+          seen.add(cert.eventId);
+          uniqueCerts.push(cert);
+        }
+      }
+  
+      return uniqueCerts;
     } catch (err) {
       console.error("Failed to fetch certificates", err);
       return [];
     }
   };
-
-  
-
-
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -122,7 +130,7 @@ const GeneratePage = () => {
             <div className="flex items-center justify-between">
               <span
                 className={`${
-                  cert.certificateStatus === "Published"
+                  cert.certificateStatus === "Registered"
                     ? "text-[#43936C] border-[#b8dbca] bg-[#F6F6F6]"
                     : "text-[#3D3F40] border-[#b8dbca] bg-[#EBF0F4]"
                 } border px-2 py-1 rounded-md`}
@@ -141,11 +149,11 @@ const GeneratePage = () => {
             </div>
           </div>
           <Button
-            label={cert.certificateStatus === "Published" ? "See Result" : "Edit"}
+            label={cert.certificateStatus === "Registered" ? "See Result" : "Edit"}
             onClick={() =>
               handleNavigate(
-                cert.certificateStatus === "Published"
-                  ? `/generate/${cert.id}/result`
+                cert.certificateStatus === "Registered"
+                  ? `/generate/${cert.id}/result?eventId=${cert.eventId}`
                   : `/generate/${cert.id}`
               )
             }

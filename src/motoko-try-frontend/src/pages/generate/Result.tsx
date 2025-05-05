@@ -1,16 +1,56 @@
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams, useSearchParams, } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "../../components/molecules/Navbar";
 import Button from "../../components/elements/Button";
 
 import { backgrounds, icons } from "../../constants";
+import { useEffect } from "react";
+import { motoko_try_backend } from "../../../../declarations/motoko-try-backend";
+
+interface CertificateNew {
+  id: string;
+  eventId: number;
+  certificateStatus: string;
+  participantName: string;
+  participantRole: string;
+  description: string;
+  certificateTitle: string;
+  certificateLabel: string;
+  certificateLink: string;
+  participantStatus: string;
+  eventDate: string;
+  eventName: string;
+}
 
 const ResultGeneratePage = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const [searchParams] = useSearchParams();
+  const [certificates, setCertificates] = useState<CertificateNew[]>([]);
 
   const handleNavigate = (href: string) => {
     navigate(href);
   };
+
+  const getCertificatesByEventId = async (eventId: number) => {
+    const resultCertificates = await motoko_try_backend.getCertificatesByEvent(eventId);
+    console.log("Result", resultCertificates);
+  
+    // If your backend returns an object like { data: [...] }, adjust accordingly:
+    const data = resultCertificates?.data[0];
+    setCertificates(data);
+  };
+
+
+  useEffect(() => {
+
+    console.log("Certificate ID:", id);
+    const eventId = searchParams.get("eventId");
+    getCertificatesByEventId(Number(eventId))
+
+
+
+  }, [id])
 
   return (
     <div className="w-full h-[1300px] font-dm-sans">
@@ -30,7 +70,8 @@ const ResultGeneratePage = () => {
               >
                 Generate {">"}
               </span>{" "}
-              Class A Certificate of Completion
+              {/* Class A Certificate of Completion */}
+              {certificates[0]?.eventName}
             </p>
           </div>
           <div className="mt-2 w-full h-[22 0px] flex flex-col p-7 bg-linear-to-r from-[#B14EDF] to-[#B14EDF]/80 rounded-lg shadow-lg">
@@ -51,7 +92,9 @@ const ResultGeneratePage = () => {
             </div>
             <div className="w-full mt-2">
               <p className="text-2xl font-semibold text-white">
-                Class A Certificate of Completion
+              {certificates[0]?.eventName}
+              {certificates[0]?.certificateTitle ? ` | ${certificates[0].certificateTitle}` : ""}
+
               </p>
               <div className="flex items-center text-white gap-2">
                 <p className="text-sm">2 Pages</p>
@@ -66,7 +109,7 @@ const ResultGeneratePage = () => {
                   width={20}
                   alt="icon certificate"
                 />
-                <span>1.307 Certificate</span>
+                <span>{ certificates.length } Certificate</span>
               </p>
             </div>
           </div>
@@ -103,30 +146,30 @@ const ResultGeneratePage = () => {
                     <th scope="col" className="px-6 py-3">
                       Tanggal
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    {/* <th scope="col" className="px-6 py-3">
                       Aksi
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
-                  {Array.from({ length: 10 }).map((_, index) => (
-                    <tr className="border-b border-gray-200">
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                      >
-                        Multazam Arkham
-                      </th>
-                      <td className="px-6 py-4">Mahasiswa MSIB </td>
-                      <td className="px-6 py-4">Completed</td>
-                      <td className="px-6 py-4">08/09/24</td>
-                      <td className="px-6 py-4">
-                        <span className="w-8 h-8 p-2 flex items-center justify-center bg-[#F5F3FF] rounded-md">
-                          <img src={icons.action_purple} alt="action" />
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
+                {certificates.map((cert, index) => (
+                  <tr key={index} className="border-b border-gray-200">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                    >
+                      {cert.participantName}
+                    </th>
+                    <td className="px-6 py-4">{cert.participantRole || "-"}</td>
+                    <td className="px-6 py-4">{cert.participantStatus}</td>
+                    <td className="px-6 py-4">{cert.eventDate}</td>
+                    {/* <td className="px-6 py-4">
+                      <span className="w-8 h-8 p-2 flex items-center justify-center bg-[#F5F3FF] rounded-md">
+                        <img src={icons.action_purple} alt="action" />
+                      </span>
+                    </td> */}
+                  </tr>
+                ))}
                 </tbody>
               </table>
             </div>

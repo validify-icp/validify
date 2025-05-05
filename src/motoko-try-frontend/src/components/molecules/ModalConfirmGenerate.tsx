@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motoko_try_backend } from '../../../../declarations/motoko-try-backend';
-
+import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 // import { saveAs } from "file-saver";
@@ -35,6 +35,8 @@ interface CertificateCreateReq {
 
 const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
   const certificateRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const navigate = useNavigate();
+  
 
   const {
     title,
@@ -51,6 +53,10 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
   } = useSelector((state: RootState) => state.certificate);
 
   useEffect(() => {}, [title]);
+
+  const handleNavigate = (href: string) => {
+    navigate(href);
+  };
 
   const handleDownload = async () => {
     const urls: string[] = [];
@@ -100,6 +106,12 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
     const hitApiCreate = await motoko_try_backend.createCertificatesNew(createCertifateReqData)
 
     console.log("Res API: ", hitApiCreate)
+
+    if (hitApiCreate.status) {
+      handleNavigate(`/generate/${createCertifateReqData[0].id}/result?eventId=${createCertifateReqData[0].eventId}`);
+    } else {
+      alert("Error")
+    }
 
     // const content = await zip.generateAsync({ type: "blob" });
     // saveAs(content, "certificates.zip");

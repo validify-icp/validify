@@ -66,64 +66,6 @@ const ValidatePage = () => {
     setIdCertificates(uniqueIds);
   }, [ocrResults]);
 
-  // const data_participants = [
-  //   {
-  //     id: "R5D8ISOQOY",
-  //     status: "Not Found",
-  //     eventId: 1,
-  //     link: "#",
-  //     participantName: "r8hvwy8",
-  //     roleDescription: "2f1ffv",
-  //     certificateTitle: "m4zhzio",
-  //     issuedBy: "Tes Issued",
-  //     eventName: "Tes event",
-  //   },
-  //   {
-  //     id: "R5D8ISOQOY",
-  //     status: "REGISTERED",
-  //     eventId: 1,
-  //     link: "b6jduba",
-  //     participantName: "r8hvwy8",
-  //     roleDescription: "2f1ffv",
-  //     certificateTitle: "m4zhzio",
-  //     issuedBy: "Tes Issued",
-  //     eventName: "Tes event",
-  //   },
-  //   {
-  //     id: "R5D8ISOQOY",
-  //     status: "Not Found",
-  //     eventId: 1,
-  //     link: "#",
-  //     participantName: "r8hvwy8",
-  //     roleDescription: "2f1ffv",
-  //     certificateTitle: "m4zhzio",
-  //     issuedBy: "Tes Issued",
-  //     eventName: "Tes event",
-  //   },
-  //   {
-  //     id: "R5D8ISOQOY",
-  //     status: "REGISTERED",
-  //     eventId: 1,
-  //     link: "b6jduba",
-  //     participantName: "r8hvwy8",
-  //     roleDescription: "2f1ffv",
-  //     certificateTitle: "m4zhzio",
-  //     issuedBy: "Tes Issued",
-  //     eventName: "Tes event",
-  //   },
-  //   {
-  //     id: "R5D8ISOQOY",
-  //     status: "REGISTERED",
-  //     eventId: 1,
-  //     link: "b6jduba",
-  //     participantName: "r8hvwy8",
-  //     roleDescription: "2f1ffv",
-  //     certificateTitle: "m4zhzio",
-  //     issuedBy: "Tes Issued",
-  //     eventName: "Tes event",
-  //   },
-  // ];
-
   const totalNotFound = dataParticipant.filter(
     (item) => item.status === "Not Found"
   ).length;
@@ -271,6 +213,7 @@ const ValidatePage = () => {
                           <td className={`px-6 py-3`}>
                             <a
                               href={item.link}
+                              target="_blank"
                               className={`${
                                 item.link !== "#"
                                   ? "text-[#3267E3] underline"

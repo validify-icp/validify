@@ -12,6 +12,7 @@ import ModalConfirmGenerate from "../../components/molecules/ModalConfirmGenerat
 import ModalReviewParticipants from "../../components/molecules/ModalReviewParticipants";
 
 import type { RootState } from "../../store";
+import moment from "moment";
 
 import {
   images,
@@ -214,7 +215,8 @@ const DetailGeneratePage = () => {
                   Draft
                 </span>
                 <p className="text-[#535760] text-sm">
-                  Created at 10 Oct 2022 18:30
+                  {/* Created at 10 Oct 2022 18:30 */}
+                  Created at {moment().format("DD MMM YYYY HH:mm")}
                 </p>
               </div>
             </div>
