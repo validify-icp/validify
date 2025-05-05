@@ -119,8 +119,8 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
 
     // const content = await zip.generateAsync({ type: "blob" });
     // saveAs(content, "certificates.zip");
-    const content = await zip.generateAsync({ type: "blob" });
-    saveAs(content, "certificates.zip");
+    // const content = await zip.generateAsync({ type: "blob" });
+    // saveAs(content, "certificates.zip");
 
     setIsLoading(false);
   };
