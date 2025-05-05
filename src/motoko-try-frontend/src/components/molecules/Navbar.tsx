@@ -25,8 +25,8 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
   }, []);
 
   return (
-    <header className="fixed z-[111] top-4 left-20 right-20 flex items-center justify-between border px-5 py-2 border-slate-200 rounded-lg bg-white/20 backdrop-blur-3xl">
-      <NavLink to="/" className="flex items-center gap-2">
+    <header className="fixed z-[111] top-4 left-20 right-20 flex items-center justify-between border px-5 py-2 border-slate-200 rounded-lg bg-white/20 backdrop-blur-3xl max-sm:top-[90%] max-sm:left-0 max-sm:right-0 max-sm:bottom-0 max-sm:rounded-none max-sm:border-none">
+      <NavLink to="/" className="flex items-center gap-2 max-sm:hidden">
         {logo_color === "text-white" && (
           <img
             src={isLogoChange ? logos.main_purple : logos.main}
@@ -46,9 +46,9 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
         </span>
       </NavLink>
       {true && (
-        <nav>
+        <nav className="max-sm:w-full">
           <ul
-            className={`flex gap-8 text-base ${
+            className={`flex gap-8 text-base max-sm:text-sm max-sm:justify-center ${
               isScroll ? "text-black" : menu_color
             }`}
           >
@@ -80,7 +80,7 @@ const Navbar = ({ logo_color = "text-white", menu_color = "text-white" }) => {
         </nav>
       )}
       {true && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 max-sm:hidden">
           <span className="bg-[#EFF3FA] px-2 py-2 text-black rounded-2xl">
             NA
           </span>
