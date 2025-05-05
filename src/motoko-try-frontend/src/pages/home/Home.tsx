@@ -13,6 +13,7 @@ import { extractCertificateID } from "../../utils/certificate";
 import { icons, images, logos } from "../../constants";
 
 import type { RootState, AppDispatch } from "../../store";
+import Loading from "../../components/elements/Loading";
 
 const HomePage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -42,6 +43,7 @@ const HomePage = () => {
         }}
       >
         <Navbar />
+        {loading && <Loading />}
         <div className="mt-20 py-10">
           <div className="w-[60%] border-yellow-500 mx-auto">
             <h1 className="text-5xl text-white text-center font-bold">
