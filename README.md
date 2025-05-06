@@ -8,7 +8,7 @@
     Validify is a digital platform for fast, secure, and automated certificate creation and verification. With features like custom design uploads, Excel-based batch generation, OCR validation, and blockchain-powered storage via Internet Computer Protocol (ICP), Validify offers a modern solution for digital certification across industries.
     <br/>
     <br/>
-    <a href="https://ojbgx-ciaaa-aaaal-qsnma-cai.icp0.io/">View Demo</a>
+    <a href="https://youtu.be/cXDXjghX4NU">View Demo</a>
     ·
     <a href="https://github.com/validify-icp/validify/issues">Report Bug</a>
     ·
