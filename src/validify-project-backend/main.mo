@@ -1,4 +1,4 @@
-import Debug "mo:base/Debug";
+// import Debug "mo:base/Debug";
 import Array "mo:base/Array";
 import Controller "events/controller";
 import CertController "certificate/controller";

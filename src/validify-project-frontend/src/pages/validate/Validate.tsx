@@ -11,7 +11,7 @@ import { backgrounds, icons, images } from "../../constants";
 
 import type { RootState, AppDispatch } from "../../store";
 import { extractCertificateID } from "../../utils/certificate";
-import { motoko_try_backend } from '../../../../declarations/motoko-try-backend';
+import { validify_project_backend } from '../../../../declarations/validify-project-backend';
 
 
 import { processOCR } from "../../store/ocr/action";
@@ -49,7 +49,7 @@ const ValidatePage = () => {
   const getCertificateUser = async (extractedIds: string[])  => {
     try {
       setIsLoading(true)
-      let resGetCertif = await motoko_try_backend.getAllCustCertificates(extractedIds)
+      let resGetCertif = await validify_project_backend.getAllCustCertificates(extractedIds)
       setDataParticipant(resGetCertif.data[0])
       
     } catch (error) {

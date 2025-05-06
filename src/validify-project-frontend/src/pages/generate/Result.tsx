@@ -5,7 +5,7 @@ import Button from "../../components/elements/Button";
 
 import { backgrounds, icons } from "../../constants";
 import { useEffect } from "react";
-import { motoko_try_backend } from "../../../../declarations/motoko-try-backend";
+import { validify_project_backend } from "../../../../declarations/validify-project-backend";
 
 interface CertificateNew {
   id: string;
@@ -33,7 +33,7 @@ const ResultGeneratePage = () => {
   };
 
   const getCertificatesByEventId = async (eventId: bigint) => {
-    const resultCertificates = await motoko_try_backend.getCertificatesByEvent(eventId);
+    const resultCertificates = await validify_project_backend.getCertificatesByEvent(eventId);
   
     // If your backend returns an object like { data: [...] }, adjust accordingly:
     const data = resultCertificates?.data[0];

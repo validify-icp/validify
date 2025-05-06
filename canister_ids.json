@@ -1,8 +1,8 @@
 {
-  "motoko-try-backend": {
-    "ic": "ipdxa-2iaaa-aaaak-qug5a-cai"
+  "validify-project-backend": {
+    "ic": "pepcz-naaaa-aaaal-qsnlq-cai"
   },
-  "motoko-try-frontend": {
-    "ic": "iicru-xqaaa-aaaak-qug5q-cai"
+  "validify-project-frontend": {
+    "ic": "ojbgx-ciaaa-aaaal-qsnma-cai"
   }
 }

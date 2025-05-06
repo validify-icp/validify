@@ -1,4 +1,4 @@
-import { motoko_try_backend } from '../../../../declarations/motoko-try-backend';
+import { validify_project_backend } from '../../../../declarations/validify-project-backend';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
@@ -99,7 +99,7 @@ const ModalConfirmGenerate = ({ open, onClose }: ModalProps) => {
         createCertifateReqData.push(createData);
       }
 
-    const hitApiCreate = await motoko_try_backend.createCertificatesNew(createCertifateReqData)
+    const hitApiCreate = await validify_project_backend.createCertificatesNew(createCertifateReqData)
 
 
     if (hitApiCreate.status) {

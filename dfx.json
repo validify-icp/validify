@@ -1,18 +1,18 @@
 {
   "canisters": {
-    "motoko-try-backend": {
-      "main": "src/motoko-try-backend/main.mo",
+    "validify-project-backend": {
+      "main": "src/validify-project-backend/main.mo",
       "type": "motoko"
     },
-    "motoko-try-frontend": {
+    "validify-project-frontend": {
       "dependencies": [
-        "motoko-try-backend"
+        "validify-project-backend"
       ],
       "source": [
-        "src/motoko-try-frontend/dist"
+        "src/validify-project-frontend/dist"
       ],
       "type": "assets",
-      "workspace": "motoko-try-frontend"
+      "workspace": "validify-project-frontend"
     }
   },
   "defaults": {

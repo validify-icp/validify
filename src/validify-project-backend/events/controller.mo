@@ -71,7 +71,7 @@ module {
                         organizerId = Option.get(update.organizerId, event.organizerId);
                     };
                     
-                    ignore events.put(i, updatedEvent);
+                    // ignore events.put(i, updatedEvent);
                     return #ok(updatedEvent);
                 };
             };

@@ -6,7 +6,7 @@ import Button from "../../components/elements/Button";
 import Input from "../../components/elements/Input";
 import Navbar from "../../components/molecules/Navbar";
 import ModalNewCertificate from "../../components/molecules/ModalNewCertificate";
-import { motoko_try_backend } from '../../../../declarations/motoko-try-backend';
+import { validify_project_backend } from '../../../../declarations/validify-project-backend';
 
 import { backgrounds, icons, images } from "../../constants";
 
@@ -35,7 +35,7 @@ const GeneratePage = () => {
 
   const fetchCertificates = async (): Promise<CertificateNew[]> => {
     try {
-      const res = await motoko_try_backend.getAllCertificates();
+      const res = await validify_project_backend.getAllCertificates();
   
       if (!res?.data) return [];
   
