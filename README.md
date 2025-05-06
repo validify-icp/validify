@@ -1,161 +1,118 @@
-# 🚀 ICP Project Setup Guide
-
-This guide will walk you through setting up the development environment, creating identities, deploying locally, and deploying to the Internet Computer (IC) mainnet.
-
----
-
-## 🔧 1. Install Dependencies
-
-### 📦 Required Tools
-
-* [Node.js (v16 or v18)](https://nodejs.org/)
-* [DFX SDK (from DFINITY)](https://internetcomputer.org/docs/current/developer-docs/setup/sdk-installation)
-
-### 📥 Install DFX
-
-```bash
-sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
-```
-
-> ✅ Restart your terminal after installing.
+<br />
+<div align="center">
+  <a href="https://github.com/Nafidinara/creditopia">
+    <img src="assets/images/logo.jpg" alt="Logo">
+  </a>
+  <h3 align="center">Validify - Automated, Verifiable Certificates at Scale and Powered by AI & Blockchain</h3>
+  <p align="center">
+    Validify is a digital platform for fast, secure, and automated certificate creation and verification. With features like custom design uploads, Excel-based batch generation, OCR validation, and blockchain-powered storage via Internet Computer Protocol (ICP), Validify offers a modern solution for digital certification across industries.
+    <br/>
+    <br/>
+    <a href="https://ojbgx-ciaaa-aaaal-qsnma-cai.icp0.io/">View Demo</a>
+    ·
+    <a href="https://github.com/validify-icp/validify/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/validify-icp/validify/issues">Request Feature</a>
+  </p>
+</div>
 
 ---
 
-## 👤 2. Create and Use an Identity
+## 🚀 Why Validify?
 
-### Create a new identity
+<img src="assets/images/banner.png" alt="Validify Banner">
 
-```bash
-dfx identity new <your-identity-name>
-```
+### ✅ 1. Fast & Efficient
 
-Example:
+Generate certificates at scale with a single upload of Excel data and your own custom design.
 
-```bash
-dfx identity new dev
-```
+### ✅ 2. Reliable Validation
 
-### Use your identity
+Validate certificates using OCR technology without manual input or cross-checking.
 
-```bash
-dfx identity use <your-identity-name>
-```
+### ✅ 3. Secure & Transparent
 
-Example:
+All data is stored on the ICP blockchain to ensure authenticity and prevent tampering.
 
-```bash
-dfx identity use dev
-```
+### ✅ 4. User-Friendly
 
-### Check current identity
-
-```bash
-dfx identity whoami
-```
+Simple interface for creating, managing, and verifying digital certificates with ease.
 
 ---
 
-## 🎟 3. Redeem Coupon for Free Cycles
+## 🔑 Key Features
 
-If you have a coupon code, redeem it using:
+- 🎨 Upload your own background designs
+- 📦 Bulk generation via Excel template
+- 🔍 OCR-powered certificate validation
+- 🔐 Immutable storage via ICP blockchain
+- 📄 Unique QR code on every certificate
+- 📊 Admin dashboard for monitoring and logs
 
-```bash
-dfx ledger fabricate-cycles --coupon <YOUR_COUPON_CODE> --network ic
-```
+## 🧑‍💻 Technologies Used
 
-Example:
+- **Internet Computer Protocol (ICP)**
+- **Motoko** for smart contract development
+- **React Typescript** for frontend interface
+- **Tesseract** for AI certificate scanning & validation
 
-```bash
-dfx ledger fabricate-cycles --coupon 9c167e82b2926e04a53d281e9f275c4f --network ic
-```
+## 🏆 What We’re Proud Of
 
-Check your cycles balance:
+- Successfully integrated OCR technology for certificate validation
+- Seamless batch certificate generation with real-time blockchain recording
+- Built a user-friendly interface for non-technical users to create digital certificates
+- Deployed a decentralized validation system using Internet Computer Protocol (ICP)
 
-```bash
-dfx wallet --network ic balance
-```
+## ⚡ The Superpowers of Internet Computer (ICP)
 
----
+- 🔧 Easy debugging and fast iteration using Motoko
+- 🔐 Immutable and decentralized data storage for secure certification
+- ⚙️ Simple deployment and integration with modern front-end stacks (React.ts)
+- 🤝 Backed by a helpful and active developer community
+- 💸 Extremely low deployment and maintenance costs compared to traditional servers
 
-## 🧪 4. Deploy Canisters Locally
+## Getting Started
 
-### Start the local replica
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/validify-icp/validify.git .
+   ```
+2. Go To INSTALLATION.MD:
+   Follow all the instruction on the INSTALLATION.MD file
 
-```bash
-dfx start --background
-```
+## Demo App
 
-### Deploy all canisters to local
+| Verify Landing Page                        | Register Events                               |
+| ------------------------------------------ | --------------------------------------------- |
+| ![Image 1](assets/images/landing-page.jpg) | ![Image 2](assets/images/register-events.jpg) |
 
-```bash
-dfx deploy
-```
+| Preview Certificate                               | Upload Own Background                        |
+| ------------------------------------------------- | -------------------------------------------- |
+| ![Image 1](assets/images/preview-certificate.jpg) | ![Image 2](assets/images/own-background.jpg) |
 
-### OR deploy specific canister
+| Participants Completion                       |
+| --------------------------------------------- |
+| ![Image 1](assets/images/data-completion.jpg) |
 
-```bash
-dfx deploy <canister-name>
-```
+| Preview Participants                               | Preview Participants Error                                |
+| -------------------------------------------------- | --------------------------------------------------------- |
+| ![Image 1](assets/images/preview-participants.jpg) | ![Image 2](assets/images/preview-participants-errors.jpg) |
 
-### View local frontend (if applicable)
+| List Result Certificate                                | Certificate Image                               |
+| ------------------------------------------------------ | ----------------------------------------------- |
+| ![Image 1](assets/images/list-result-certificates.jpg) | ![Image 2](assets/images/certificate-image.jpg) |
 
-```bash
-http://localhost:4943/?canisterId=$(dfx canister id <frontend-canister-name>)
-```
+| Validate Page                               | Validate Result                                |
+| ------------------------------------------- | ---------------------------------------------- |
+| ![Image 1](assets/images/validate-page.jpg) | ![Image 2](assets/images/validate-results.jpg) |
 
----
+## License
 
-## 🌐 5. Deploy Canisters on IC Mainnet
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-### Step 1: Create Canisters on IC
+## Created by VictoryAndFortune Team
 
-```bash
-dfx canister create <canister-name> --network ic
-```
-
-Or all at once:
-
-```bash
-dfx canister create --all --network ic
-```
-
-### Step 2: Top Up Canisters with Cycles
-
-Example to top up with 5T cycles:
-
-```bash
-dfx canister top-up <canister-name> --amount 5000000000000 --network ic
-```
-
-### Step 3: Deploy to IC Network
-
-```bash
-dfx deploy --network ic
-```
-
-### Check Canister IDs
-
-```bash
-dfx canister id <canister-name> --network ic
-```
-
-### Access Frontend on ICP
-
-```bash
-https://<frontend-canister-id>.icp0.io/
-```
-
----
-
-## 📌 Notes
-
-* All deployment settings are defined in `dfx.json`
-* Make sure to commit your `.did` files and important build artifacts for frontend/backend interface integration.
-
----
-
-## 💬 Need Help?
-
-Join the [DFINITY Developer Forum](https://forum.dfinity.org/) or reach out to the ICP community on [Discord](https://discord.gg/hs3vPbvx2q)
-
----
+- Daniel Alvaro Sormin (Developer)
+- Fauzan Ali Vijsma (Developer)
+- Nisrina Thifal Khairunnisa (UI/UX Designer)
+- Aditama Putra (UI/UX Designer)
