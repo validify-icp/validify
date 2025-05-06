@@ -46,8 +46,6 @@ Simple interface for creating, managing, and verifying digital certificates with
 - 📦 Bulk generation via Excel template
 - 🔍 OCR-powered certificate validation
 - 🔐 Immutable storage via ICP blockchain
-- 📄 Unique QR code on every certificate
-- 📊 Admin dashboard for monitoring and logs
 
 ## 🧑‍💻 Technologies Used
 
